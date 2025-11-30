@@ -12,7 +12,12 @@ This document summarizes the complete process of installing, configuring, and tr
 
 ## 1. Creating the pfSense Virtual Machine in VirtualBox
 
-You prepared a pfSense VM with three network adapters:
+ Prepared a pfSense VM with three network adapters:
+
+![VirtualBox Network Adapters Configuration](./images/network-adapters/NAT.png)
+![VirtualBox Network Adapters Configuration](./images/network-adapters/Internal.png)
+![VirtualBox Network Adapters Configuration](./images/network-adapters/Host-only.png)
+*Figure 1: VirtualBox network adapter configuration for pfSense VM*
 
 ### Adapter 1 – NAT (WAN)
 Used to provide pfSense with internet access via VirtualBox NAT.
@@ -57,6 +62,9 @@ VirtualBox created:
 
  Configured:
 - pfSense OPT1 IP = `192.168.56.2/24`
+
+![Windows Host-Only Adapter Configuration](./images/VM-adapter/VM-adapter.png)
+*Figure 2: Windows host-only network adapter manual configuration*
 
 **Reason:**
 - Creates an isolated, secure admin network between pfSense and Windows host.
@@ -189,6 +197,9 @@ This section describes what was specifically configured in the pfSense web inter
    - Username: `admin`
    - Password: `pfsense` (after resetting via console).
 
+![pfSense GUI Dashboard](./images/pfSense-GUI/pfSense-GUI.png)
+*Figure 3: pfSense web interface dashboard showing WAN, LAN, and OPT1 status*
+
 **Reason:**
 - This is the admin interface for complete firewall, network, DHCP, DNS, and other configurations.
 
@@ -238,6 +249,9 @@ Configured OPT1 in GUI as follows:
    - Other options left at default values.
    - Save → Apply Changes.
 
+![OPT1 Interface Configuration](./images/pfSense-GUI/OPT1.png)
+*Figure 4: OPT1 interface configuration in pfSense GUI*
+
 2. **Firewall → Rules → OPT1**
    - Added new rule:
      - Action: `Pass`
@@ -246,6 +260,9 @@ Configured OPT1 in GUI as follows:
      - Source: `Any`
      - Destination: `Any`
    - Save → Apply.
+
+![OPT1 Firewall Rules](./images/pfSense-GUI/OPT-rule.png)
+*Figure 5: Firewall rule allowing all traffic on OPT1 interface*
 
 **Result:**
 - From  Windows host (`192.168.56.1`) we can now constantly ping `192.168.56.2` and access the GUI without additional tricks.
@@ -265,6 +282,9 @@ Enabled DHCP server for LAN in GUI:
    - Other options (gateway, DNS) left at default (gateway = `10.10.0.1`, DNS = pfSense or external DNS).
    - Save.
 
+![DHCP Server Configuration](./images/pfSense-GUI/DHCP-server.png)
+*Figure 6: DHCP server configuration for LAN network*
+
 **Result:**
 - All VMs connected to TechNovaNet (Internal Network) automatically receive an IP address in the range `10.10.0.x`, gateway `10.10.0.1`, and can communicate within the lab network.
 
@@ -283,6 +303,9 @@ To ensure all domains and external services work:
    - Outgoing Network Interfaces: `WAN`.
    - Other settings left at default.
    - Save.
+
+![DNS Resolver Configuration](./images/pfSense-GUI/DNS'resolve.png)
+*Figure 7: DNS Resolver configuration for internal and external DNS resolution*
 
 **Result:**
 - Clients in the LAN network can perform DNS queries (e.g., `google.com`) via pfSense, and pfSense forwards queries to the internet.
@@ -311,8 +334,8 @@ After all GUI settings, verified:
   - LAN: `10.10.0.1/24`
   - OPT1: `192.168.56.2/24`
 
-This confirms that the graphical configuration of pfSense is completely finished and ready for the next steps: deploying Windows Server, clients, and CALDERA system.
+![Interface Status Verification](./images/pfSense-terminal/pfSense.png)
+*Figure 8: Final interface status showing all three networks configured correctly*
 
----
 
 
