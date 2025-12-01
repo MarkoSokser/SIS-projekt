@@ -27,7 +27,7 @@ Virtual cable connected: ✔
 ```
 
 ![CALDERA Network Adapter](./images/Caldera/network/internal.png)
-*Figure 40: Internal Network adapter configuration for CALDERA*
+*Figure 33: Internal Network adapter configuration for CALDERA*
 
 **Purpose:**
 Enables CALDERA server communication with all other VMs (DC, Workstation, Linux Server).
@@ -81,7 +81,7 @@ network:
 ```
 
 ![Netplan Static IP Configuration](./images/Caldera/netplan/netplan.png)
-*Figure 41: Static IP configuration for CALDERA server*
+*Figure 34: Static IP configuration for CALDERA server*
 
 ### 3.3. Applying Configuration
 
@@ -120,7 +120,7 @@ Cache=no-negative
 ```
 
 ![Resolved.conf Configuration](./images/Caldera/resolved/resolved.png)
-*Figure 42: systemd-resolved configuration for domain resolution*
+*Figure 35: systemd-resolved configuration for domain resolution*
 
 ### 4.2. Restart Resolver
 
@@ -130,7 +130,7 @@ sudo resolvectl flush-caches
 resolvectl status
 ```
 ![Resolved.conf Configuration](./images/Caldera/resolved/resolve.png)
-*Figure 42: systemd-resolved configuration for domain resolution*
+*Figure 36: systemd-resolved configuration for domain resolution*
 
 ### 4.3. Test
 
@@ -140,7 +140,7 @@ nslookup technova.local
 ```
 
 ![Ping Test](./images/Caldera/ping/ping_test.png)
-*Figure 42: Ping test for technova.local*
+*Figure 37: Ping test for technova.local*
 
 **Result:** DNS works correctly after this configuration
 
@@ -241,7 +241,7 @@ http://10.10.0.53:8888
 ```
 
 ![CALDERA Server Running](./images/Caldera/caldera_server/terminal_caldera.png)
-*Figure 44: CALDERA server running in terminal*
+*Figure 38: CALDERA server running in terminal*
 
 **Default login:**
 ```
@@ -250,7 +250,7 @@ Password: admin
 ```
 
 ![CALDERA Web Interface](./images/Caldera/caldera_server/Caldera_gui.png)
-*Figure 45: CALDERA web interface login screen*
+*Figure 39: CALDERA web interface login screen*
 
 ---
 
@@ -326,7 +326,7 @@ chmod +x splunkd
 
 ![Linux Agent Running](./images/Caldera/caldera_server/agent.png)
 ![Linux Agent Running](./images/Caldera/caldera_server/aggent.png)
-*Figure 47: Sandcat agent running on Linux server*
+*Figure 40: Sandcat agent running on Linux server*
 
 **Result:**  Agent appears in CALDERA → Agents
 
@@ -370,9 +370,9 @@ Sandcat works over HTTP, not SSH.
 
 ---
 
-## 11. Troubleshooting (All Encountered Problems)
+## 10. Troubleshooting (All Encountered Problems)
 
-### 11.1. DNS SERVFAIL / Temporary Failure
+### 10.1. DNS SERVFAIL / Temporary Failure
 
 **Symptoms:**
 - Cannot resolve `technova.local`
@@ -385,39 +385,39 @@ Fixed by configuring `resolved.conf` and netplan DNS field
 
 ---
 
-### 11.2. Emergency Shell / Black Screen
+### 10.2. Emergency Shell / Black Screen
 
 **Symptoms:**
 - VM boots to emergency mode
 - Error: `/dev/disk/... does not exist`
 
 **Solution:**
-✔ Fixed `fstab`, removed incorrect entry, rebooted
+Fixed `fstab`, removed incorrect entry, rebooted
 
 **Reference:** Section 7
 
 ---
 
-### 11.3. "invalid user operator:operator"
+### 10.3. "invalid user operator:operator"
 
 **Symptoms:**
 - `chown` command fails
 - User doesn't exist
 
 **Solution:**
-✔ Created `operator` user before running `chown`
+ Created `operator` user before running `chown`
 
 **Reference:** Section 5.2
 
 ---
 
-### 11.4. Agent Download Doesn't Work
+### 10.4. Agent Download Doesn't Work
 
 **Symptoms:**
 - `wget` fails to download agent
 
 **Solution:**
-✔ Use POST variant:
+Use POST variant:
 ```bash
 curl -s -X POST -H "platform:linux" http://10.10.0.53:8888/file/download > splunkd
 ```
@@ -426,26 +426,26 @@ curl -s -X POST -H "platform:linux" http://10.10.0.53:8888/file/download > splun
 
 ---
 
-### 11.5. "Unsupported SSH Version"
+### 10.5. "Unsupported SSH Version"
 
 **Symptoms:**
 - Error message about SSH version
 
 **Solution:**
-✔ Normal — CALDERA doesn't use SSH for agent communication
+Normal — CALDERA doesn't use SSH for agent communication
 
 **Reference:** Section 9
 
 ---
 
-### 11.6. Windows Can't Download EXE
+### 10.6. Windows Can't Download EXE
 
 **Symptoms:**
 - PowerShell download fails
 - Connection refused
 
 **Solution:**
-✔ Enable HTTP on pfSense (LAN → allow all)
+Enable HTTP on pfSense (LAN → allow all)
 
 **Verification:**
 ```powershell
@@ -454,7 +454,7 @@ Test-NetConnection -ComputerName 10.10.0.53 -Port 8888
 
 ---
 
-## 12. Snapshot Creation
+## 11. Snapshot Creation
 
 ### Creating CALDERA Server Snapshot:
 
@@ -465,7 +465,7 @@ Description: IP 10.10.0.53, CALDERA installed, agents tested
 
 ---
 
-## 15. Current Infrastructure State
+## 12. Current Infrastructure State
 
 Your complete network now includes:
 

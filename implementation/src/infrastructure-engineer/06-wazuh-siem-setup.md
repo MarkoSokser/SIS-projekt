@@ -31,7 +31,7 @@ Cable Connected: ✔
 ```
 
 ![Wazuh Network Adapter](./images/pfSense/network-adapters/Internal.png)
-*Figure 54: Internal Network adapter configuration for Wazuh SIEM*
+*Figure 41: Internal Network adapter configuration for Wazuh SIEM*
 
 ### 1.3. Loading ISO
 
@@ -82,7 +82,7 @@ network:
 ```
 
 ![Wazuh Static IP Configuration](./images/Wazuh/conf/conf.png)
-*Figure 55: Static IP configuration for Wazuh SIEM*
+*Figure 42: Static IP configuration for Wazuh SIEM*
 
 ### Apply Configuration:
 
@@ -141,7 +141,7 @@ wazuh-remoted is running...
 wazuh-analysisd is running...
 ```
 ![Wazuh running](./images/Wazuh/running/wazuh.png)
-*Figure 55: Wazuh services running*
+*Figure 43: Wazuh services running*
 
 ### 4.4. Important Log Locations
 
@@ -199,7 +199,7 @@ Get-Service WazuhSvc
 ```
 
 ![Windows Agent Service](./images/Wazuh/windows_runing/wazuh_win.png)
-*Figure 58: Wazuh service running on Windows*
+*Figure 44: Wazuh service running on Windows*
 
 ---
 
@@ -254,7 +254,7 @@ systemctl status wazuh-agent
 ```
 
 ![Linux Agent Status](./images/Wazuh/linux_running/wazuh_linux.png)
-*Figure 60: Wazuh agent service status on Linux*
+*Figure 45: Wazuh agent service status on Linux*
 
 ---
 
@@ -302,7 +302,7 @@ Available agents:
 ```
 
 ![Agent List](./images/Wazuh/agents/wazuh-agents.png)
-*Figure 61: List of connected agents in Wazuh*
+*Figure 646 List of connected agents in Wazuh*
 
 ---
 
@@ -346,7 +346,7 @@ sudo tail -f /var/ossec/logs/alerts/alerts.log
 ```
 
 ![Alert Monitoring](./images/Wazuh/agents/test.png)
-*Figure 62: Real-time alert monitoring in Wazuh logs*
+*Figure 47: Real-time alert monitoring in Wazuh logs*
 
 **View JSON format:**
 
@@ -357,7 +357,7 @@ sudo tail -f /var/ossec/logs/alerts/alerts.json
 ---
 
 
-## 10. Architecture Summary
+## 8. Architecture Summary
 
 ### Complete TechNovaNet Environment:
 
@@ -398,7 +398,7 @@ pfSense (10.10.0.1)
 
 ---
 
-## 11. Snapshot Creation
+## 9. Snapshot Creation
 
 ### Creating Wazuh SIEM Snapshot:
 

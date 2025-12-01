@@ -42,7 +42,7 @@ Connected: ✔
 ```
 
 ![Workstation Network Adapter](./images/pfSense/network-adapters/Internal.png)
-*Figure 18: Internal Network adapter configuration*
+*Figure 15: Internal Network adapter configuration*
 
 ---
 
@@ -117,7 +117,7 @@ DNS Server: 10.10.0.10 (DC)
 ```
 
 ![Network Status After DHCP](./images/WinWorkstation/ipconf/config.png)
-*Figure 21: Network adapter with valid IP from pfSense DHCP*
+*Figure 16: Network adapter with valid IP from pfSense DHCP*
 
 ---
 
@@ -150,7 +150,7 @@ ping 10.10.0.1
 ---
 
 ![Ping Validation](./images/WinWorkstation/DNS_validation/ping_pfsense.png)
-*Figure 23: Ping test for pfSense LAN*
+*Figure 17: Ping test for pfSense LAN*
 
 ### Test 2: Ping Domain Controller
 
@@ -163,7 +163,7 @@ ping 10.10.0.10
 ---
 
 ![Ping Validation](./images/WinWorkstation/DNS_validation/ping_DC.png)
-*Figure 23: Ping test for Domain Controller*
+*Figure 18: Ping test for Domain Controller*
 ### Test 3: DNS Lookup for Domain
 
 ```cmd
@@ -180,7 +180,7 @@ Address: 10.10.0.10
 ```
 
 ![DNS Validation](./images/WinWorkstation/DNS_validation/nslookup.png)
-*Figure 23: DNS lookup verification for technova.local domain*
+*Figure 19: DNS lookup verification for technova.local domain*
 
 ---
 
@@ -212,7 +212,7 @@ Password: Administrator1209!!
 ```
 
 ![Domain Join](./images/WinWorkstation/domain/domain.png)
-*Figure 25: Joining technova.local domain*
+*Figure 20: Joining technova.local domain*
 
 ### Expected Result:
 
@@ -248,14 +248,14 @@ Password: ReadTeam1234??
 ```
 
 ![Domain Login](./images/WinWorkstation/accounts/accounts.png)
-*Figure 27: Domain login screen with TECHNOVA domain*
+*Figure 21: Domain login screen with TECHNOVA domain*
 
 **Expected:**  Successful login with domain credentials
 
 ---
 
 
-## 13. Snapshot Creation
+## 12. Snapshot Creation
 
 ### Creating Golden State Snapshot:
 
@@ -273,7 +273,7 @@ Password: ReadTeam1234??
 
 ---
 
-## 14. Current Infrastructure State
+## 13. Current Infrastructure State
 
 Your network now includes:
 
@@ -287,9 +287,9 @@ pfSense (10.10.0.1)
 
 ---
 
-## 17. Common Issues and Solutions
+## 14. Common Issues and Solutions
 
-### ❗ Problem: Cannot get IP from DHCP
+###  Problem: Cannot get IP from DHCP
 
 **Symptoms:**
 - IP stays at 169.254.x.x
@@ -302,7 +302,7 @@ pfSense (10.10.0.1)
 
 ---
 
-### ❗ Problem: Cannot ping DC
+###  Problem: Cannot ping DC
 
 **Symptoms:**
 - Request timed out when pinging 10.10.0.10
@@ -314,7 +314,7 @@ pfSense (10.10.0.1)
 
 ---
 
-### ❗ Problem: Domain join fails
+###  Problem: Domain join fails
 
 **Symptoms:**
 - "Domain could not be contacted"
@@ -327,7 +327,7 @@ pfSense (10.10.0.1)
 
 ---
 
-### ❗ Problem: "The specified domain either does not exist or could not be contacted"
+###  Problem: "The specified domain either does not exist or could not be contacted"
 
 **Root Cause:** DNS not pointing to DC
 

@@ -50,7 +50,7 @@ Cable Connected: ✔
 ```
 
 ![Ubuntu Server Network Adapter](./images/pfSense/network-adapters/Internal.png)
-*Figure 30: Internal Network adapter configuration for Ubuntu Server*
+*Figure 22: Internal Network adapter configuration for Ubuntu Server*
 
 **Result:**
 Server is placed in the same internal network as:
@@ -93,7 +93,7 @@ Password: ********
 ```
 
 ![Ubuntu Login Screen](./images/UbuntuServer/login/login.png)
-*Figure 31: Ubuntu Server TTY login screen*
+*Figure 23: Ubuntu Server TTY login screen*
 
 ### 3.3. Removing ISO
 
@@ -143,7 +143,7 @@ network:
 ```
 
 ![Netplan Configuration](./images/UbuntuServer/dhcp-conf/dhcp-conf.png)
-*Figure 32: Netplan YAML configuration file*
+*Figure 24: Netplan YAML configuration file*
 
 3. **Save file** (Ctrl+O, Enter, Ctrl+X)
 
@@ -168,7 +168,7 @@ ip a
 - `enp0s3` is now **UP** with IP address: `10.10.0.51/24` (assigned by pfSense DHCP on LAN)
 
 ![Network Configuration After Netplan](./images/UbuntuServer/dhcp-conf/ip_a.png)
-*Figure 33: Network interface with IP from pfSense DHCP*
+*Figure 25: Network interface with IP from pfSense DHCP*
 
 #### Connectivity Test:
 
@@ -176,6 +176,8 @@ ip a
 ping 10.10.0.1    # pfSense LAN gateway
 ```
 ![Ping Test](./images/UbuntuServer/testing_ping/pfSense_ping.png)
+*Figure 26: Ping test for pfSense LAN gateway*
+
 **Result:**  Successful replies confirm Linux server is in TechNovaNet segment
 
 ---
@@ -224,7 +226,7 @@ ssh vbubuntu@10.10.0.51
 - Entered password for `vbubuntu` and got shell
 
 ![SSH Connection Test](./images/UbuntuServer/testing_ping/ssh.png)
-*Figure 34: Successful SSH connection from Windows Workstation*
+*Figure 27: Successful SSH connection from Windows Workstation*
 
 **Confirmed:**
 - pfSense passes traffic within TechNovaNet
@@ -255,7 +257,7 @@ Added to sudo group:
 sudo usermod -aG sudo webadmin
 ```
 ![Vulnerable User Creation](./images/UbuntuServer/volnerable_user/user.png)
-*Figure 34: Successful user creation*
+*Figure 28: Successful user creation*
 
 #### 6.1.2. Sudo NOPASSWD (Privilege Escalation Paradise)
 
@@ -272,7 +274,7 @@ webadmin ALL=(ALL) NOPASSWD:ALL
 ```
 
 ![Sudo NOPASSWD Configuration](./images/UbuntuServer/nopasswd/nopasswd.png)
-*Figure 35: Sudoers configuration allowing passwordless sudo*
+*Figure 29: Sudoers configuration allowing passwordless sudo*
 
 **Result:**
 `webadmin` can:
@@ -346,7 +348,7 @@ curl http://localhost
 **Result:** HTML content of default Ubuntu Apache page displayed in terminal.
 
 ![Apache Default Page](./images/UbuntuServer/apache/apache.png)
-*Figure 36: Apache2 default page accessible on port 80*
+*Figure 30: Apache2 default page accessible on port 80*
 
 **Security Impact:**
 - HTTP port 80 listening on 0.0.0.0
@@ -405,7 +407,7 @@ Added at end:
 **Meaning:** Every minute, root executes `backup.sh`
 
 ![Cron Configuration](./images/UbuntuServer/cron_job/cron_job.png)
-*Figure 37: Root cron job configuration*
+*Figure 31: Root cron job configuration*
 
 #### 6.4.3. Cron Activity Verification
 
@@ -415,6 +417,7 @@ Journalctl output showed periodic CRON entries:
 sudo journalctl -u cron -f
 ```
 ![Cron output](./images/UbuntuServer/cron_job/cron_output.png)
+*Figure 32: Cron job activity in journalctl*
 
 **Result:** Execution of `/usr/local/bin/backup.sh` every 60 seconds observed.
 
@@ -487,6 +490,6 @@ pfSense (10.10.0.1)
    +--- Ubuntu Server (ubuntu-srv) – 10.10.0.51
 ```
 
----
+
 
 

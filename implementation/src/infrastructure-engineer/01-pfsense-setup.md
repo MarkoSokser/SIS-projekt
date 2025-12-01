@@ -184,11 +184,11 @@ This completes the pfSense infrastructure layer.
 
 ---
 
-## 10. pfSense Configuration in the Web GUI (Step-by-Step)
+## 9. pfSense Configuration in the Web GUI (Step-by-Step)
 
 This section describes what was specifically configured in the pfSense web interface and why.
 
-### 10.1. First Access to pfSense GUI
+### 9.1. First Access to pfSense GUI
 
 1. Opened in browser:
    - `https://192.168.56.2`
@@ -205,7 +205,7 @@ This section describes what was specifically configured in the pfSense web inter
 
 ---
 
-### 10.2. Setup Wizard
+### 9.2. Setup Wizard
 
 Steps in Setup Wizard (System → Setup Wizard):
 
@@ -236,7 +236,7 @@ Steps in Setup Wizard (System → Setup Wizard):
 
 ---
 
-### 10.3. OPT1 Configuration (Admin Network) in GUI
+### 9.3. OPT1 Configuration (Admin Network) in GUI
 
 Configured OPT1 in GUI as follows:
 
@@ -272,7 +272,7 @@ Configured OPT1 in GUI as follows:
 
 ---
 
-### 10.4. DHCP Server on LAN Network
+### 9.4. DHCP Server on LAN Network
 
 Enabled DHCP server for LAN in GUI:
 
@@ -293,7 +293,7 @@ Enabled DHCP server for LAN in GUI:
 
 ---
 
-### 10.5. DNS Resolver
+### 9.5. DNS Resolver
 
 To ensure all domains and external services work:
 
@@ -315,7 +315,7 @@ To ensure all domains and external services work:
 
 ---
 
-### 10.6. Verification After Configuration
+### 9.6. Verification After Configuration
 
 After all GUI settings, verified:
 

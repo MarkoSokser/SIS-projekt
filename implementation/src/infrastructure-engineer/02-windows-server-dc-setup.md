@@ -52,7 +52,7 @@ Connected: ✔
 ```
 
 ![Network Adapter Configuration](./images/pfSense/network-adapters/Internal.png)
-*Figure 10: Internal Network adapter configuration for Domain Controller*
+*Figure 9: Internal Network adapter configuration for Domain Controller*
 
 **Why?**
 - This is your enterprise network simulated in VirtualBox.
@@ -94,7 +94,7 @@ sconfig
 This is the official Microsoft configuration menu.
 
 ![sconfig Menu](./images/WinServer2019/conf_menu/conf_menu.png)
-*Figure 11: Server Configuration (sconfig) main menu*
+*Figure 10: Server Configuration (sconfig) main menu*
 
 ---
 
@@ -116,7 +116,7 @@ Gateway: 10.10.0.1
 ```
 
 ![Static IP Configuration](./images/WinServer2019/ipconf/IP-config.png)
-*Figure 12: Static IP configuration for Domain Controller*
+*Figure 11: Static IP configuration for Domain Controller*
 
 **Why?**
 - Standard IP scheme for enterprise networks.
@@ -220,14 +220,11 @@ Add-ADGroupMember -Identity "Domain Admins" -Members "admin_lab"
 
 ![User Creation](./images/WinServer2019/users/Users.png)
 ![User Creation](./images/WinServer2019/users/User-admin.png)
-*Figure 14: Active Directory users created via PowerShell*
+*Figure 12: Active Directory users created via PowerShell*
 
 ---
 
 ## 9. Problems and Solutions
-
-
----
 
 ###  Problem: "Account already exists"
 
@@ -272,7 +269,7 @@ ipconfig /all
 
 ![DNS Validation](./images/WinServer2019/DNS_validation/nslookup.png)
 ![DNS Validation](./images/WinServer2019/DNS_validation/ipconfig.png)
-*Figure 15: DNS resolution verification*
+*Figure 13: DNS resolution verification*
 
 **Result:** DNS resolves correctly to `10.10.0.10`
 
@@ -298,7 +295,7 @@ DC-SERVER – clean AD + users
 - Team work distribution
 
 ![Snapshot Creation](./images/WinServer2019/snap/Snapshoot.png)
-*Figure 16: VirtualBox snapshot of clean Domain Controller state*
+*Figure 14: VirtualBox snapshot of clean Domain Controller state*
 
 ---
 
