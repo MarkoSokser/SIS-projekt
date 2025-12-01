@@ -124,4 +124,22 @@
 25. **TCP/IP Protocol Suite**  
     Forouzan, B. A. (2010). *TCP/IP Protocol Suite* (4th ed.). McGraw-Hill.
 
+## VPN and Remote Access
+
+26. **Tailscale Documentation**  
+    Tailscale Inc. (2024). *Tailscale Knowledge Base*.  
+    https://tailscale.com/kb/
+
+27. **Tailscale ACL Configuration**  
+    Tailscale Inc. (2024). *Access Controls - Tailscale*.  
+    https://tailscale.com/kb/1018/acls/
+
+28. **pfSense and Tailscale Integration**  
+    Tailscale Inc. (2024). *Tailscale on pfSense*.  
+    https://tailscale.com/kb/1097/pfsense/
+
+29. **OpenSSH Configuration Manual**  
+    OpenSSH Project. (2024). *OpenSSH Manual Pages and Configuration Guide*.  
+    https://www.openssh.com/manual.html
+
 
