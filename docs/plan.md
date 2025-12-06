@@ -115,3 +115,53 @@ A "golden state" snapshot was created for all VMs:
 This allows the team to always return to the starting point without errors.
 
 ---
+
+## Role 2: Blue Team Engineer
+
+### 1. Project Role
+
+As Blue Team Engineer, the responsibilities include:
+- designing monitoring and detection strategy for the TechNova lab
+- preparing SIEM (Wazuh) for ingesting logs from all hosts
+- defining use cases and alerts for key ATT&CK techniques
+- coordinating with Red Team to understand planned attack paths
+- documenting detection coverage and gaps for the final report
+ - performing post-attack remediation and hardening to fix identified vulnerabilities
+
+### 2. Main Planned Activities
+
+- onboard all project endpoints (DC, workstation, Ubuntu, CALDERA, pfSense where possible) into Wazuh
+- standardize time sync and hostname conventions to simplify correlation
+- create base dashboards for authentication events, process creation and network connections
+- prepare rules for detecting common attack behaviors (brute force, privilege escalation, lateral movement)
+- validate that logs from CALDERA activities are visible and correctly tagged in SIEM
+
+### 3. Pre‑Attack Monitoring Setup
+
+Before Red Team operations start, the Blue Team will:
+- verify agents are installed and sending logs from Windows and Linux hosts
+- configure log retention appropriate for the exercise window
+- tune out obvious noise (benign system events) to focus on attack indicators
+- test a few synthetic events (failed logons, sudo misuse) to confirm alerts trigger
+
+### 4. Coordination With Other Roles
+
+- work with Infrastructure Engineer to ensure critical logs (Windows Security, Sysmon if available, Linux auth/journald, web server logs) are forwarded
+- agree with Red Team on a high‑level attack timeline so monitoring can be focused during exercises
+- share detection expectations and feedback so attacks can be replayed if needed for evidence collection
+
+### 5. Planned Deliverables
+
+- baseline dashboards and alert ruleset in Wazuh
+- short runbook for triaging common alerts during exercises
+- summary of which MITRE ATT&CK techniques are covered by detections and which remain gaps
+
+### 6. Planned Remediation Steps
+
+After the Red Team completes their attacks, the Blue Team will:
+- harden SSH access by changing weak passwords used in brute-force scenarios
+- contain compromised Windows hosts by adding pfSense firewall rules to block outbound C2 traffic
+- remove insecure sudoers settings (NOPASSWD) on the Linux server to prevent easy privilege escalation
+- re-enable and configure Windows firewall rules to block lateral movement from attacker infrastructure
+
+This plan ensures the environment is not only vulnerable and attack‑ready, but also observable and measurable from the Blue Team perspective.

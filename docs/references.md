@@ -142,4 +142,12 @@
     OpenSSH Project. (2024). *OpenSSH Manual Pages and Configuration Guide*.  
     https://www.openssh.com/manual.html
 
+30. **Windows Defender Firewall with Advanced Security**  
+    Microsoft Corporation. (2024). *Windows Defender Firewall with Advanced Security Documentation*.  
+    https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-firewall/windows-firewall-with-advanced-security
+
+31. **Wazuh Rules and Decoders**  
+    Wazuh, Inc. (2024). *Rules, Decoders and Detection Logic in Wazuh*.  
+    https://documentation.wazuh.com/current/user-manual/ruleset/index.html
+
 
