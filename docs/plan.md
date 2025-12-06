@@ -65,7 +65,7 @@ All VMs are connected to the same internal network **TechNovaNet** (10.10.0.0/24
 | pfSense | 10.10.0.1 |
 | Domain Controller | 10.10.0.10 |
 | Windows Workstation | 10.10.0.20 |
-| Ubuntu Ranjivi Server | 10.10.0.51 |
+| Ubuntu Vulnerable Server | 10.10.0.51 |
 | CALDERA Server | 10.10.0.53 |
 | Wazuh SIEM | 10.10.0.70 |
 
