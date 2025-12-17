@@ -224,9 +224,213 @@ Add-ADGroupMember -Identity "Domain Admins" -Members "admin_lab"
 
 ---
 
-## 9. Problems and Solutions
+## 9. Creating Vulnerable User with Fine-Grained Password Policy
 
-###  Problem: "Account already exists"
+For realistic attack simulation (T1078 - Valid Accounts, T1110 - Brute Force, T1021 - SMB Lateral Movement), we need a user with intentionally weak password that bypasses default AD complexity requirements.
+
+### 9.1. Why Fine-Grained Password Policy (FGPP)?
+
+**Problem:** Default AD Domain Password Policy enforces complexity and minimum length for ALL users.
+
+**Solution:** Fine-Grained Password Policy allows applying weaker password rules to specific users or groups while maintaining strong policies for others.
+
+**Use Case:** Create `employee` user with password `employee` for attack simulations.
+
+---
+
+### 9.2. Creating the Weak Password Policy
+
+**On Domain Controller (PowerShell as Administrator):**
+
+```powershell
+New-ADFineGrainedPasswordPolicy `
+  -Name "CALDERA_WeakPolicy" `
+  -MinPasswordLength 6 `
+  -ComplexityEnabled $false `
+  -PasswordHistoryCount 0 `
+  -MaxPasswordAge (New-TimeSpan -Days 3650) `
+  -Precedence 1
+```
+
+**Policy Settings:**
+- `MinPasswordLength 6` - Allows short passwords
+- `ComplexityEnabled $false` - No uppercase/lowercase/number/symbol requirements
+- `PasswordHistoryCount 0` - Can reuse old passwords
+- `MaxPasswordAge 3650 days` - Password never expires (10 years)
+- `Precedence 1` - Highest priority when multiple policies apply
+
+---
+
+### 9.3. Creating the Vulnerable User
+
+```powershell
+New-ADUser -Name "Employee" -SamAccountName "employee" `
+  -Enabled $false `
+  -Description "Vulnerable user for attack simulation"
+```
+
+**Note:** User is created DISABLED initially - this is important for the next steps.
+
+---
+
+### 9.4. Applying Policy to User
+
+```powershell
+Add-ADFineGrainedPasswordPolicySubject `
+  -Identity "CALDERA_WeakPolicy" `
+  -Subjects employee
+```
+
+**Verification:**
+
+```powershell
+Get-ADUserResultantPasswordPolicy employee
+```
+
+**Expected Output:**
+```
+Name                  : CALDERA_WeakPolicy
+MinPasswordLength     : 6
+ComplexityEnabled     : False
+PasswordHistoryCount  : 0
+```
+
+If you see `CALDERA_WeakPolicy` → policy is correctly applied.
+
+---
+
+### 9.5. Setting Weak Password (CRITICAL: Correct Order!)
+
+**IMPORTANT: AD Security Mechanism**
+
+Active Directory has a rule:
+> "Disabled account may have any password, but Enabled account must have valid password at the moment of enabling."
+
+**WRONG Order (will FAIL):**
+1. Enable-ADAccount → FAIL (no valid password yet)
+2. Set-ADAccountPassword → would work but account can't be enabled
+
+**CORRECT Order:**
+1. Set password FIRST (while user is still disabled)
+2. Enable account SECOND
+
+---
+
+**Step 1: Set the Weak Password (user still DISABLED):**
+
+```powershell
+Set-ADAccountPassword `
+  -Identity employee `
+  -Reset `
+  -NewPassword (ConvertTo-SecureString "employee" -AsPlainText -Force)
+```
+
+**Step 2: Enable the Account:**
+
+```powershell
+Enable-ADAccount -Identity employee
+```
+
+**Step 3: Verification:**
+
+```powershell
+Get-ADUser employee -Properties Enabled,LockedOut |
+  Select Enabled, LockedOut
+```
+
+**Expected Output:**
+```
+Enabled   : True
+LockedOut : False
+```
+
+---
+
+### 9.6. Alternative Weak Passwords for Testing
+
+You can also use these for different attack scenarios:
+
+```powershell
+# Password = username (very common weakness)
+Set-ADAccountPassword -Identity employee -Reset `
+  -NewPassword (ConvertTo-SecureString "employee" -AsPlainText -Force)
+
+# Simple numeric
+Set-ADAccountPassword -Identity employee -Reset `
+  -NewPassword (ConvertTo-SecureString "employee123" -AsPlainText -Force)
+
+# Classic weak passwords
+Set-ADAccountPassword -Identity employee -Reset `
+  -NewPassword (ConvertTo-SecureString "password" -AsPlainText -Force)
+
+Set-ADAccountPassword -Identity employee -Reset `
+  -NewPassword (ConvertTo-SecureString "qwerty" -AsPlainText -Force)
+```
+
+---
+
+### 9.7. MITRE ATT&CK Mapping
+
+This vulnerable user enables simulation of:
+
+| Technique ID | Technique Name | Description |
+|--------------|----------------|-------------|
+| **T1078** | Valid Accounts | Using legitimate credentials |
+| **T1110.001** | Brute Force: Password Guessing | Guessing weak passwords |
+| **T1110.003** | Brute Force: Password Spraying | Trying common passwords |
+| **T1021.002** | SMB/Windows Admin Shares | Lateral movement with valid creds |
+
+---
+
+### 9.8. Why Enable-ADAccount Failed Initially
+
+**Root Cause Analysis:**
+
+When attempting `Enable-ADAccount` before setting password:
+
+1. AD checks if user has a valid password
+2. Default Domain Policy requires complexity
+3. User has no password → doesn't meet policy
+4. AD refuses to enable account
+
+**Error Message:**
+```
+Enable-ADAccount : The password does not meet the length, complexity, or history 
+requirement of the domain.
+```
+
+**Solution:** Apply FGPP first, then set password (FGPP allows simple passwords), then enable.
+
+---
+
+### 9.9. Security Event Log Entries
+
+After successful login with `employee` account, check Security Event Log:
+
+**Event ID 4624** - Successful Logon
+```
+Account Name: employee
+Account Domain: TECHNOVA
+Logon Type: 10 (RemoteInteractive) or 3 (Network)
+```
+
+**Event ID 4625** - Failed Logon (if wrong password)
+```
+Account Name: employee
+Failure Reason: Unknown user name or bad password
+```
+
+**Event ID 4740** - Account Locked Out (after too many failures)
+```
+Account Name: employee
+Caller Computer Name: WIN-CLIENT
+```
+
+---
+
+## 10. Problems and Solutions
+
+### Problem: "Account already exists"
 
 Attempted to create user `admin` which already exists on DC.
 
@@ -234,7 +438,7 @@ Attempted to create user `admin` which already exists on DC.
 
 ---
 
-###  Problem: DC cannot ping pfSense
+### Problem: DC cannot ping pfSense
 
 **Reason:** pfSense VM was not running.
 
@@ -248,7 +452,36 @@ ping 10.10.0.1
 
 ---
 
-## 10. Validation (Verifying Everything Works)
+### Problem: Enable-ADAccount fails with "password does not meet requirements"
+
+**Symptoms:**
+- Error when trying to enable user account
+- "The password does not meet the length, complexity, or history requirement"
+
+**Root Cause:** 
+Trying to enable account BEFORE setting password that meets policy.
+
+**Solution:** 
+1. Apply Fine-Grained Password Policy to user first
+2. Set password while account is still disabled
+3. Then enable account
+
+**Correct Command Sequence:**
+```powershell
+# 1. Apply weak policy
+Add-ADFineGrainedPasswordPolicySubject -Identity "CALDERA_WeakPolicy" -Subjects employee
+
+# 2. Set password (account still disabled)
+Set-ADAccountPassword -Identity employee -Reset `
+  -NewPassword (ConvertTo-SecureString "employee" -AsPlainText -Force)
+
+# 3. Now enable
+Enable-ADAccount -Identity employee
+```
+
+---
+
+## 11. Validation (Verifying Everything Works)
 
 ###  Ping pfSense LAN:
 
@@ -281,12 +514,12 @@ Server successfully rebooted after domain creation.
 
 ---
 
-## 11. Snapshot (Golden State)
+## 12. Snapshot (Golden State)
 
 ### Created Snapshot:
 
 ```
-DC-SERVER – clean AD + users
+DC-SERVER – clean AD + users + vulnerable employee
 ```
 
 **Why?**
@@ -299,7 +532,7 @@ DC-SERVER – clean AD + users
 
 ---
 
-## 12. Current Infrastructure State
+## 13. Current Infrastructure State
 
 The network now looks like this:
 
@@ -307,4 +540,6 @@ The network now looks like this:
 pfSense (10.10.0.1)
    |
    +--- Windows Server 2019 DC (technova.local) – 10.10.0.10
+         |
+         +--- Users: admin_lab, blue_team, red_team, employee (vulnerable)
 ```

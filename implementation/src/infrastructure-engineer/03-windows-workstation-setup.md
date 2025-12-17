@@ -243,7 +243,7 @@ Password: BlueTeam0987!!
 ```
 
 ```
-TECHNOVA\reda_team
+TECHNOVA\read_team
 Password: ReadTeam1234??
 ```
 
@@ -251,6 +251,47 @@ Password: ReadTeam1234??
 *Figure 21: Domain login screen with TECHNOVA domain*
 
 **Expected:**  Successful login with domain credentials
+
+---
+
+## 11. Vulnerable User Login (Attack Simulation)
+
+### 11.1. Employee Account (Weak Credentials)
+
+This account was created on the Domain Controller with intentionally weak password for attack simulations.
+
+**Login Credentials:**
+
+```
+Username: TECHNOVA\employee
+Password: employee
+```
+
+### 11.2. Login via Windows GUI
+
+1. On Windows 10/11 Workstation login screen
+2. Click **Other user**
+3. Enter: `TECHNOVA\employee`
+4. Password: `employee`
+5. Press Enter
+
+**Expected:** Successful login to Windows desktop
+
+---
+
+### 11.3. Login via RDP (Remote Desktop)
+
+**From another machine:**
+
+1. Open Remote Desktop Connection
+2. Computer: `10.10.0.50` (or Tailscale IP)
+3. Username: `TECHNOVA\employee`
+4. Password: `employee`
+
+**PowerShell command:**
+```powershell
+mstsc /v:10.10.0.50
+```
 
 ---
 
