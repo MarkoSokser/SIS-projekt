@@ -79,7 +79,7 @@ The operation relies on a custom Fact Source to define target parameters dynamic
 
 > **Screenshot Reference:** Configuration of the Fact Source used to target the Windows machine.
 >
-> ![SIS Meta Config](./images/sis_meta_config.png)
+> ![SIS Meta Config](./Images/sis_meta_config.png)
 
 ### 4.2. Custom Abilities Developed
 Standard CALDERA abilities were modified to fit the specific lab environment constraints (e.g., using `python3` scripts on Linux or `curl` on Windows).
@@ -96,7 +96,7 @@ Standard CALDERA abilities were modified to fit the specific lab environment con
 
 > **Screenshot Reference:** Configuration of the Python3 PsExec command in Caldera.
 >
-> ![Lateral Movement Ability](./images/ability_lateral_config.png)
+> ![Lateral Movement Ability](./Images/ability_lateral_config.png)
 
 **B. Data Exfiltration**
 *   **Name:** `Custom Exfiltration (Generate & Steal)`
@@ -109,7 +109,7 @@ Standard CALDERA abilities were modified to fit the specific lab environment con
 
 > **Screenshot Reference:** Configuration of the native Curl command for exfiltration.
 >
-> ![Exfiltration Ability](./images/ability_exfil_config.png)
+> ![Exfiltration Ability](./Images/ability_exfil_config.png)
 
 ### 4.3. Adversary Profile (`Project_Story_Mode`)
 All abilities were chained into a single profile to simulate a complete attack lifecycle. The baseline profile consists of 11 discrete steps designed to validate the kill chain without excessive noise.
@@ -126,7 +126,7 @@ All abilities were chained into a single profile to simulate a complete attack l
 
 > **Screenshot Reference:** The baseline adversary profile configuration (11 steps).
 >
-> ![Adversary Profile Baseline](./images/adversary_profile_baseline.png)
+> ![Adversary Profile Baseline](./Images/adversary_profile_baseline.png)
 
 ---
 
@@ -173,10 +173,10 @@ The operation was executed automatically using the `Project_Story_Mode` profile.
 > **Evidence:**
 >
 > **1. Operation Timeline:** Green indicators confirm successful execution of the kill chain steps (11 abilities).
-> ![Operation Results](./images/operation_results_timeline.png)
+> ![Operation Results](./Images/operation_results_timeline.png)
 >
 > **2. Active Agents:** Proof of successful Lateral Movement (Windows Agent `itlfxp` is active).
-> ![Active Agents](./images/active_agents_list.png)
+> ![Active Agents](./Images/active_agents_list.png)
 
 ### 6.1. Detection Stress Test (Noise Generation for Wazuh)
 
@@ -193,13 +193,13 @@ These abilities were executed manually or appended to a secondary profile run to
 > **Screenshot Reference:**
 >
 > **1. Extended Adversary Profile:** The profile updated with noise-generating abilities (Total: 13 steps, showing "Dump Shadow" and "Noisy Service").
-> ![Extended Profile 13 Steps](./images/profile_extended_noise.png)
+> ![Extended Profile 13 Steps](./Images/profile_extended_noise.png)
 >
 > **2. Noise Configuration:** Setup of the malicious service creation ability.
-> ![Wazuh Noise Config](./images/ability_wazuh_noise_config.png)
+> ![Wazuh Noise Config](./Images/ability_wazuh_noise_config.png)
 >
 > **3. Manual Noise Execution:** Generating PAM authentication failures (`su` flooding) on Linux.
-> ![Manual Brute Force](./images/manual_pam_bruteforce.png)
+> ![Manual Brute Force](./Images/manual_pam_bruteforce.png)
 
 ---
 
