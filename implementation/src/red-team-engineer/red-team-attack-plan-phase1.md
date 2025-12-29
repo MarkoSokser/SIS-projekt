@@ -7,10 +7,14 @@ This document outlines the strategic planning, configuration, and execution of t
 2. [Target Scope](#2-target-scope)
 3. [Attack Scenarios](#3-attack-scenarios-mitre-attck-mapping)
 4. [CALDERA Configuration](#4-caldera-configuration)
+    * [4.1. Fact Source Configuration](#41-fact-source-configuration-sis_meta)
+    * [4.2. Custom Abilities Developed](#42-custom-abilities-developed)
+    * [4.3. Adversary Profile](#43-adversary-profile-project_story_mode)
 5. [Ingress Tool Transfer (Pre-Attack)](#5-ingress-tool-transfer-pre-attack)
 6. [Operation Execution Log](#6-operation-execution-log)
    * [6.1. Detection Stress Test (Noise Generation)](#61-detection-stress-test-noise-generation-for-wazuh)
 7. [Findings & Observations](#7-findings--observations)
+    * [7.1. Technical Challenges Encountered](#71-technical-challenges-encountered)
 
 ---
 
