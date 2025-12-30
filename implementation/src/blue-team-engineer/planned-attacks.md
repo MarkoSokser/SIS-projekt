@@ -99,7 +99,7 @@ This document outlines 4 attack scenarios following the Attack -> Detect -> Fix 
 
 ### Attack (Red Team)
 
-- CALDERA (`.60`) attempts to scan ports or connect via RDP to Windows (`.50`).
+- CALDERA (`.53`) attempts to scan ports or connect via RDP to Windows (`.50`).
 - Since Windows Firewall is disabled (as defined in Phase 0), the scan succeeds.
 
 ### Detection (Wazuh)
@@ -109,9 +109,9 @@ This document outlines 4 attack scenarios following the Attack -> Detect -> Fix 
 
 ### Response / Remediation (Windows Firewall)
 
-- Conclusion: `10.10.0.60` (CALDERA) should not communicate with the Windows client.
+- Conclusion: `10.10.0.53` (CALDERA) should not communicate with the Windows client.
 - Enable Windows Defender Firewall.
-- Create Inbound rule: `Block IP 10.10.0.60`.
+- Create Inbound rule: `Block IP 10.10.0.53`.
 - **Technology:** Host-based Firewall.
 
 ### Verification
@@ -195,7 +195,7 @@ This document outlines 4 attack scenarios following the Attack -> Detect -> Fix 
 | **MITRE Sub-technique** | T1021.001 - Remote Desktop Protocol |
 | **Additional Technique** | T1046 - Network Service Discovery |
 | **Target** | Windows Workstation (10.10.0.50) |
-| **Attack Vector** | Port scan + RDP from CALDERA (10.10.0.60) |
+| **Attack Vector** | Port scan + RDP from CALDERA (10.10.0.53) |
 | **Vulnerability** | Windows Firewall disabled |
 | **Wazuh Detection Rules** | 100050, 100051 |
 | **Detection Method** | Windows Security Events - Logon failures |
