@@ -326,9 +326,9 @@ The environment is now secured against the techniques used in the Phase 1 simula
 
 ---
 
-## 7. Production Security Note
+## 7. Credential Change
 
-> **CRITICAL - Credential Rotation Required in Production**
+> **Credential Rotation Performed**
 > 
 > During the Red Team attack, the `admin_lab` domain account credentials were extracted from `/tmp/db_config.py`:
 > ```
@@ -336,12 +336,16 @@ The environment is now secured against the techniques used in the Phase 1 simula
 > db_pass = 'Administrator1209!!'
 > ```
 > 
-> These credentials were successfully used for lateral movement via PsExec. **In this lab exercise, the password was NOT changed** to maintain consistency for team members during demonstrations.
-> 
-> **In a real-world incident response, credential rotation MUST be performed immediately:**
+> These credentials were successfully used for lateral movement via PsExec. **The password has been changed** to prevent future misuse of the compromised credentials.
+
+> **Remediation performed on Domain Controller:**
 > ```powershell
-> # Run on Domain Controller
-> Set-ADAccountPassword -Identity "admin_lab" -NewPassword (ConvertTo-SecureString "NewSecurePassword!" -AsPlainText -Force) -Reset
+> Set-ADAccountPassword -Identity "admin_lab" -NewPassword (ConvertTo-SecureString "Adm1nL4bS3cure2025!" -AsPlainText -Force) -Reset
 > ```
 > 
-> Deleting the credential file only removes evidence – it does NOT revoke the attacker's knowledge of the password.
+> **New Credentials:**
+> - **User:** `admin_lab`
+> - **Password:** `Adm1nL4bS3cure2025!`
+> 
+> The Infrastructure Engineer credentials document has been updated accordingly.
+> See: [00-credentials-and-access.md](../infrastructure-engineer/00-credentials-and-access.md)
