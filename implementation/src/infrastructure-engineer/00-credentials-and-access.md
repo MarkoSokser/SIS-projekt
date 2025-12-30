@@ -101,10 +101,10 @@ https://192.168.56.2
 
 ```
 Username: admin
-Password: pfsense
+Password: Sig$$2025
 ```
 
-**After first login:** Change to stronger password via System → User Manager
+**Note:** Password was changed from default `pfsense` during initial setup for security.
 
 ### Network Interfaces:
 
