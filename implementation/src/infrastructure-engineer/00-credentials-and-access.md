@@ -7,6 +7,23 @@ All passwords in this document are **intentionally weak** for educational and tr
 
 ---
 
+## Post-Remediation Credential Changes
+
+> **Updated after Blue Team remediation (Phase 1)**
+>
+> The following credentials were changed during the security remediation process:
+>
+> | Account | Original Password | New Password | Reason |
+> |---------|-------------------|--------------|--------|
+> | `webadmin` (Linux) | *(empty/weak)* | `W3bAdm1nS3cure2025!` | SSH brute force remediation |
+> | `admin_lab` (AD) | `Administrator1209!!` | `Adm1nL4bS3cure2025!` | Credential rotation after compromise |
+>
+> **Note:** The `admin_lab` password was rotated because Red Team successfully extracted it from `/tmp/db_config.py` and used it for lateral movement via PsExec.
+>
+> See: [Blue Team Post-Attack Remediation](../blue-team-engineer/blue-team-post-attack-remediation.md)
+
+---
+
 ## Table of Contents
 
 1. [Lab Overview](#1-lab-overview)
@@ -101,10 +118,10 @@ https://192.168.56.2
 
 ```
 Username: admin
-Password: pfsense
+Password: Sig$$2025
 ```
 
-**After first login:** Change to stronger password via System → User Manager
+**Note:** Password was changed from default `pfsense` during initial setup for security.
 
 ### Network Interfaces:
 
@@ -219,7 +236,7 @@ TECHNOVA\username
 ```
 Display Name: Admin Lab
 Username: admin_lab
-Password: Administrator1209!!
+Password: Adm1nL4bS3cure2025!  # UPDATED after remediation (was: Administrator1209!!)
 Domain: TECHNOVA\admin_lab
 
 Group Memberships:
@@ -396,15 +413,19 @@ ssh vbubuntu@10.10.0.51
 
 ### Vulnerable Account (Intentional Weakness):
 
+> **POST-REMEDIATION STATUS:** This account has been hardened.
+> - Password changed to strong passphrase
+> - NOPASSWD removed from sudoers
+
 ```
 Username: webadmin
-Password: Webadmin123!
-Sudo Access: NOPASSWD for ALL commands
+Password: W3bAdm1nS3cure2025!  # UPDATED (was none)
+Sudo Access: Requires password (NOPASSWD removed)
 ```
 
-**Sudo Configuration:**
+**Original Sudo Configuration (REMOVED):**
 ```
-webadmin ALL=(ALL) NOPASSWD:ALL
+# webadmin ALL=(ALL) NOPASSWD:ALL  <-- REMOVED during remediation
 ```
 
 **Security Impact:**
