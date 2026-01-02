@@ -1,0 +1,147 @@
+{
+  "version": "3.0",
+  "name": "Phase2_Hardening_Verify",
+  "description": "---",
+  "domain": "mitre-enterprise",
+  "techniques": [
+    {
+      "techniqueID": "T1110.001",
+      "tactic": "credential-access",
+      "score": 1,
+      "color": "",
+      "comment": "",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1503.003",
+      "tactic": "persistence",
+      "score": 1,
+      "color": "",
+      "comment": "",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1033",
+      "tactic": "discovery",
+      "score": 1,
+      "color": "",
+      "comment": "",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1003.008",
+      "tactic": "credential-access",
+      "score": 1,
+      "color": "",
+      "comment": "",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1543.002",
+      "tactic": "persistence",
+      "score": 1,
+      "color": "",
+      "comment": "",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1083",
+      "tactic": "discovery",
+      "score": 1,
+      "color": "",
+      "comment": "",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1046",
+      "tactic": "discovery",
+      "score": 1,
+      "color": "",
+      "comment": "",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1021.002",
+      "tactic": "lateral-movement",
+      "score": 1,
+      "color": "",
+      "comment": "",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1552.001",
+      "tactic": "credential-access",
+      "score": 1,
+      "color": "",
+      "comment": "",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1021.002",
+      "tactic": "lateral-movement",
+      "score": 1,
+      "color": "",
+      "comment": "",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1082",
+      "tactic": "discovery",
+      "score": 1,
+      "color": "",
+      "comment": "",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1518.001",
+      "tactic": "discovery",
+      "score": 1,
+      "color": "",
+      "comment": "",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1087.002",
+      "tactic": "discovery",
+      "score": 1,
+      "color": "",
+      "comment": "",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1041",
+      "tactic": "exfiltration",
+      "score": 1,
+      "color": "",
+      "comment": "",
+      "enabled": true,
+      "showSubtechniques": false
+    }
+  ],
+  "legendItems": [],
+  "showTacticRowBackground": true,
+  "tacticRowBackground": "#205b8f",
+  "selectTechniquesAcrossTactics": true,
+  "selectSubtechniquesWithParent": true,
+  "gradient": {
+    "colors": [
+      "#ffffff",
+      "#66ff66"
+    ],
+    "minValue": 0,
+    "maxValue": 1
+  }
+}
