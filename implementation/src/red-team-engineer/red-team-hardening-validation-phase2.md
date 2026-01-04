@@ -7,6 +7,7 @@ This document details the re-execution of attack scenarios against the hardened 
 2. [Execution Log (Hardening Test)](#2-execution-log-hardening-test)
 3. [Findings & Security Assessment](#3-findings--security-assessment)
 4. [Conclusion](#4-conclusion)
+    * [4.1. Technical Challenges Encountered](#41-technical-challenges-encountered)
 
 ## 1. Objective
 To execute the exact same TTPs (Tactics, Techniques, and Procedures) as in Phase 1 using the `webadmin` user context and verify that the security controls implemented by the Blue Team successfully block or detect the attacks.
@@ -31,8 +32,11 @@ The operation was executed against the target environment. Below is the detailed
 | `Port Scan Target` | Discovery | 🔴 **Failed** | **BLOCKED.** Network connection timed out. |
 | `Lateral Mov. (Standard)` | Lateral Movement | 🔴 **Failed** | **BLOCKED.** Authentication failure. |
 | `Credential Hunting` | Credential Access | 🔴 **Failed** | **BLOCKED.** File `/tmp/db_config.py` removed. |
-| `Lateral Mov. (Admin)` | Lateral Movement | 🔴 **Failed** | **BLOCKED.** Connection timed out. Firewall Active. |
+| `Lateral Mov. (Admin)` | Lateral Movement | 🔴 **Failed** | **BLOCKED.** Error: `No route to host`. Confirms strict firewall/network segmentation rules. |
 | ... | ... | ... | ... |
+| `System Information Discovery`| Discovery | ⚪ **Skipped** | Chain broken. Agent not deployed on Windows. |
+| `Security Software Discovery` | Discovery | ⚪ **Skipped** | Chain broken. |
+| `Account Discovery` | Discovery | ⚪ **Skipped** | Chain broken. |
 | `Custom Exfiltration` | **Exfiltration** | ⚪ **Skipped** | **BLOCKED.** Chain broken due to failed Lateral Movement. |
 
 ### Evidence of Remediation
@@ -42,7 +46,7 @@ The operation log shows a cascade of timeouts and failures for critical offensiv
 ![Operation Overview](./images/phase2/phase2_ops_overview.png)
 
 **B. Lateral Movement Block**
-The connection to the target Windows host (10.10.0.50) timed out/failed, confirming network segmentation rules are active.
+The connection to the target Windows host (10.10.0.50) failed with `No route to host`, confirming network segmentation rules are active.
 ![Lateral Block](./images/phase2/phase2_lateral_blocked.png)
 
 ---
@@ -53,7 +57,7 @@ The re-test confirms that **Critical Network Defenses** and **Host-Based Hardeni
 
 ### ✅ What was Fixed (Success)
 1.  **Network Segmentation / Host Firewall:**
-    *   The `Lateral Movement` attempt using Impacket PsExec failed.
+    *   The `Lateral Movement` attempt using Impacket PsExec failed with `[Errno 113] No route to host`.
     *   **Impact:** The attack chain was successfully broken before reaching the Windows target. No Windows agent was deployed.
 
 2.  **Credential Hygiene:**
@@ -78,7 +82,7 @@ The Blue Team has successfully mitigated the primary path to total domain compro
 *   Easy privilege escalation via sudo.
 *   Credential theft from config files.
 
-**Final Status:** **SECURE** (with residual user-level persistence risk)
+**Final Status:** **SECURE** (with accepted residual user-level risk)
 
 ### 4.1. Technical Challenges Encountered
 
