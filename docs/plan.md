@@ -1,5 +1,11 @@
 # Implementation plan
 
+## Table of Contents
+- [Role 1: Infrastructure Engineer](#role-1-infrastructure-engineer)
+- [Role 2: Blue Team Engineer](#role-2-blue-team-engineer)
+
+---
+
 ## Role 1: Infrastructure Engineer
 
 ### 1. Project Role
@@ -77,14 +83,14 @@ All components communicate within this network as a real corporate LAN.
 
 To allow the Red Team to execute MITRE ATT&CK techniques, the following were intentionally left:
 
-✔ Weak passwords and password reuse  
-✔ Password-based SSH access  
-✔ Weak sudoers (NOPASSWD)  
-✔ Directory listing on Apache server  
-✔ Cron backdoor  
-✔ Minimal network segmentation (flat network)  
-✔ Default Defender and minimal Windows hardening  
-✔ Unhardened AD  
+ Weak passwords and password reuse  
+ Password-based SSH access  
+ Weak sudoers (NOPASSWD)  
+ Directory listing on Apache server  
+ Cron backdoor  
+ Minimal network segmentation (flat network)  
+ Default Defender and minimal Windows hardening  
+ Unhardened AD  
 
 This makes the network realistic and vulnerably weak, which is the project's goal.
 
