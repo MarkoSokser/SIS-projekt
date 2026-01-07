@@ -1,11 +1,22 @@
 # Theoretical background
 
+## Table of Contents
+- [Infrastructure Engineering for Cybersecurity Lab Environments](#infrastructure-engineering-for-cybersecurity-lab-environments)
+- [Virtual Lab Architecture](#2-virtual-lab-architecture)
+- [Operating System Configuration](#3-operating-system-configuration)
+- [Vulnerability Implementation](#4-vulnerability-implementation)
+- [Monitoring Infrastructure](#5-monitoring-infrastructure)
+- [Baseline Management](#6-baseline-management)
+- [Red Team & Blue Team Support](#7-red-team--blue-team-support)
+- [Common Technical Challenges](#8-common-technical-challenges)
+
+---
+
 ## Infrastructure Engineering for Cybersecurity Lab Environments
 
 ### 1. Introduction
 
 Infrastructure Engineering in cybersecurity involves designing, building, and maintaining controlled environments for adversary simulation. The role creates the foundation for offensive and defensive security operations by balancing realistic vulnerabilities with monitored, controlled systems.
-
 
 
 ### 2. Virtual Lab Architecture
