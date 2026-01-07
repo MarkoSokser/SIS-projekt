@@ -39,4 +39,4 @@ Phase 0 established security monitoring infrastructure before Red Team engagemen
 
 ## Related Files
 
-- Full setup guide: [blue-team-pre-attack-setup.md](../../implementation/src/blue-team-engineer/blue-team-pre-attack-setup.md)
+- Full setup guide: [blue-team-pre-attack-setup.md](../../../implementation/src/blue-team-engineer/blue-team-pre-attack-setup.md)

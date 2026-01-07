@@ -50,4 +50,4 @@ All remediations verified by Red Team Phase 2 re-test:
 
 ## Related Files
 
-- Full remediation guide: [blue-team-post-attack-remediation.md](../../implementation/src/blue-team-engineer/blue-team-post-attack-remediation.md)
+- Full remediation guide: [blue-team-post-attack-remediation.md](../../../implementation/src/blue-team-engineer/blue-team-post-attack-remediation.md)

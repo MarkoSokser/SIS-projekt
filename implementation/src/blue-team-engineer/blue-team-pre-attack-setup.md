@@ -10,9 +10,9 @@ Images used by this document are stored under `./images/pre-attack/` in the repo
 
 - [0. Prerequisites – Agents Already Installed](#0-prerequisites--agents-already-installed)
 - [1. Wazuh Server Hardening (Central SIEM)](#1-wazuh-server-hardening-central-siem)
-- [2. Windows Workstation](#2-windows-workstation-101000050)
-- [3. Linux Server](#3-linux-server-101000051)
-- [4. pfSense Firewall](#4-pfsense-firewall-https101001-on-windows-workstation)
+- [2. Windows Workstation](#2-windows-workstation-10100050)
+- [3. Linux Server](#3-linux-server-10100051)
+- [4. pfSense Firewall](#4-pfsense-firewall-https10100-on-windows-workstation)
 - [5. Final Verification & Signal Tests](#5-final-verification--signal-tests)
 - [Pre-Attack Status Snapshot](#pre-attack-status-snapshot)
 - [Ready for Red Team](#ready-for-red-team)

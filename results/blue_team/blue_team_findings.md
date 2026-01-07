@@ -147,6 +147,6 @@ This document summarizes the key findings from Blue Team operations during the T
 
 ## Related Documentation
 
-- [Blue Team Pre-Attack Setup](../implementation/src/blue-team-engineer/blue-team-pre-attack-setup.md)
-- [Blue Team Post-Attack Remediation](../implementation/src/blue-team-engineer/blue-team-post-attack-remediation.md)
-- [Planned Attack Scenarios](../implementation/src/blue-team-engineer/planned-attacks.md)
+- [Blue Team Pre-Attack Setup](../../implementation/src/blue-team-engineer/blue-team-pre-attack-setup.md)
+- [Blue Team Post-Attack Remediation](../../implementation/src/blue-team-engineer/blue-team-post-attack-remediation.md)
+- [Planned Attack Scenarios](../../implementation/src/blue-team-engineer/planned-attacks.md)
