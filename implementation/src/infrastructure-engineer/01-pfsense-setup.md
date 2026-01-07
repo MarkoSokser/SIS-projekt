@@ -27,7 +27,7 @@ This document summarizes the complete process of installing, configuring, and tr
 
 ![VirtualBox Network Adapters Configuration](./images/pfSense/network-adapters/NAT.png)
 ![VirtualBox Network Adapters Configuration](./images/pfSense/network-adapters/Internal.png)
-![VirtualBox Network Adapters Configuration](./images/pfSense/network-adapters/Host-only.png)
+
 
 *Figure 1: VirtualBox network adapter configuration for pfSense VM*
 
