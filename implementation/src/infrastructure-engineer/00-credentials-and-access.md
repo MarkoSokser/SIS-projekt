@@ -31,7 +31,7 @@ All passwords in this document are **intentionally weak** for educational and tr
 3. [pfSense Firewall Credentials](#3-pfsense-firewall-credentials)
 4. [Windows Server 2019 Domain Controller](#4-windows-server-2019-domain-controller)
 5. [Active Directory Domain Accounts](#5-active-directory-domain-accounts)
-6. [Windows 10/11 Workstation](#6-windows-1011-workstation)
+6. [Windows 10 Workstation](#6-windows-1011-workstation)
 7. [Ubuntu Vulnerable Server](#7-ubuntu-vulnerable-server)
 8. [CALDERA Server](#8-caldera-server)
 9. [Wazuh SIEM Server](#9-wazuh-siem-server)
@@ -328,7 +328,7 @@ Permissions:
 
 ---
 
-## 6. Windows 10/11 Workstation
+## 6. Windows 10 Workstation
 
 ### Local Account (Pre-Domain Join):
 
@@ -1298,7 +1298,7 @@ Vulnerable: webadmin / Webadmin123!
 
 ## 16. Security Notices
 
-### ⚠️ Intentional Vulnerabilities
+###  Intentional Vulnerabilities
 
 This lab contains **intentional security weaknesses** for training:
 
@@ -1327,7 +1327,7 @@ This lab contains **intentional security weaknesses** for training:
    - Weak SSH configuration
    - No fail2ban or rate limiting
 
-### ✅ These Are Features, Not Bugs
+###  These Are Features, Not Bugs
 
 All weaknesses are documented and mapped to MITRE ATT&CK techniques for educational purposes.
 
@@ -1460,13 +1460,13 @@ Set-ADAccountPassword -Identity username -Reset
 
 ### Lab Usage Agreement
 
-✅ **Authorized Use:**
+ **Authorized Use:**
 - Educational purposes only
 - Cybersecurity training
 - MITRE ATT&CK technique demonstration
 - Security research within lab environment
 
-❌ **Prohibited Use:**
+ **Prohibited Use:**
 - Attacking systems outside this lab
 - Using techniques on production networks
 - Sharing credentials externally

@@ -8,6 +8,17 @@ This document summarizes the complete process of installing, configuring, and tr
 - Final solutions
 - Verified final configuration
 
+## Table of Contents
+- [Creating the pfSense Virtual Machine in VirtualBox](#1-creating-the-pfsense-virtual-machine-in-virtualbox)
+- [pfSense Installation Summary](#2-pfsense-installation-summary)
+- [Host-Only Network Configuration (OPT1)](#3-host-only-network-configuration-opt1)
+- [Major Problem – Cannot Ping 192.168.56.2 (OPT1)](#4-major-problem--cannot-ping-19216856-2-opt1)
+- [Solutions Applied](#5-solutions-applied)
+- [Successful Outcome – OPT1 Working](#6-successful-outcome--opt1-working)
+- [Final Verified Network Architecture](#7-final-verified-network-architecture)
+- [Final Verified State](#8-final-verified-state)
+- [pfSense Configuration in the Web GUI (Step-by-Step)](#9-pfsense-configuration-in-the-web-gui-step-by-step)
+
 ---
 
 ## 1. Creating the pfSense Virtual Machine in VirtualBox
@@ -17,6 +28,7 @@ This document summarizes the complete process of installing, configuring, and tr
 ![VirtualBox Network Adapters Configuration](./images/pfSense/network-adapters/NAT.png)
 ![VirtualBox Network Adapters Configuration](./images/pfSense/network-adapters/Internal.png)
 ![VirtualBox Network Adapters Configuration](./images/pfSense/network-adapters/Host-only.png)
+
 *Figure 1: VirtualBox network adapter configuration for pfSense VM*
 
 ### Adapter 1 – NAT (WAN)
