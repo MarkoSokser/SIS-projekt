@@ -1,5 +1,22 @@
 # References
 
+## Table of Contents
+- [MITRE Frameworks and Tools](#mitre-frameworks-and-tools)
+- [Security Information and Event Management (SIEM)](#security-information-and-event-management-siem)
+- [Network Security and Infrastructure](#network-security-and-infrastructure)
+- [Operating Systems and Configuration](#operating-systems-and-configuration)
+- [Virtualization Technologies](#virtualization-technologies)
+- [Security Best Practices and Standards](#security-best-practices-and-standards)
+- [Red Team and Adversary Simulation](#red-team-and-adversary-simulation)
+- [Vulnerability Research and Exploitation](#vulnerability-research-and-exploitation)
+- [Logging and Monitoring](#logging-and-monitoring)
+- [Linux Security and Administration](#linux-security-and-administration)
+- [Academic and Research Papers](#academic-and-research-papers)
+- [Network Architecture and Design](#network-architecture-and-design)
+- [VPN and Remote Access](#vpn-and-remote-access)
+
+---
+
 ## MITRE Frameworks and Tools
 
 1. **MITRE ATT&CK Framework**  
