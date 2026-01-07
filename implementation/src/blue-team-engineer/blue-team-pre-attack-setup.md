@@ -10,9 +10,9 @@ Images used by this document are stored under `./images/pre-attack/` in the repo
 
 - [0. Prerequisites – Agents Already Installed](#0-prerequisites--agents-already-installed)
 - [1. Wazuh Server Hardening (Central SIEM)](#1-wazuh-server-hardening-central-siem)
-- [2. Windows Workstation](#2-windows-workstation-10100050)
-- [3. Linux Server](#3-linux-server-10100051)
-- [4. pfSense Firewall](#4-pfsense-firewall-https10100-on-windows-workstation)
+- [2. Windows Workstation](#2-windows-workstation)
+- [3. Linux Server](#3-linux-server)
+- [4. pfSense Firewall](#4-pfsense-firewall)
 - [5. Final Verification & Signal Tests](#5-final-verification--signal-tests)
 - [Pre-Attack Status Snapshot](#pre-attack-status-snapshot)
 - [Ready for Red Team](#ready-for-red-team)
@@ -249,8 +249,9 @@ Re-run `sudo /var/ossec/bin/agent_control -l` and ensure both agents remain **Ac
 
 ---
 
-## 2. Windows Workstation (`10.10.0.50`)
+## 2. Windows Workstation
 
+**Target:** `10.10.0.50`  
 **Access:** RDP as `TECHNOVA\blue_team` (Password: `BlueTeam0987!!`)  
 **Goal:** Enable deep visibility (Sysmon + event channels), keep firewall intentionally disabled.
 
@@ -328,8 +329,9 @@ Confirm:
 
 ---
 
-## 3. Linux Server (`10.10.0.51`)
+## 3. Linux Server
 
+**Target:** `10.10.0.51`  
 **Access:** SSH as `vbubuntu`  
 **Goal:** Enable FIM coverage and keep deliberate weaknesses for scenarios.
 
@@ -392,8 +394,9 @@ Confirm:
 
 ---
 
-## 4. pfSense Firewall (`https://10.10.0.1`) on Windows Workstation
+## 4. pfSense Firewall
 
+**Target:** `https://10.10.0.1` (accessed from Windows Workstation)  
 **Goal:** Forward firewall logs to Wazuh and confirm receipt.
 
 ### 4.1 Enable LAN rule logging
