@@ -76,6 +76,7 @@ VirtualBox created:
 - pfSense OPT1 IP = `192.168.56.2/24`
 
 ![Windows Host-Only Adapter Configuration](./images/pfSense/VM-adapter/VM-adapter.png)
+
 *Figure 2: Windows host-only network adapter manual configuration*
 
 **Reason:**
@@ -210,6 +211,7 @@ This section describes what was specifically configured in the pfSense web inter
    - Password: `pfsense` (after resetting via console).
 
 ![pfSense GUI Dashboard](./images/pfSense/pfSense-GUI/pfSense-GUI.png)
+
 *Figure 3: pfSense web interface dashboard showing WAN, LAN, and OPT1 status*
 
 **Reason:**
@@ -262,6 +264,7 @@ Configured OPT1 in GUI as follows:
    - Save → Apply Changes.
 
 ![OPT1 Interface Configuration](./images/pfSense/pfSense-GUI/OPT1.png)
+
 *Figure 4: OPT1 interface configuration in pfSense GUI*
 
 2. **Firewall → Rules → OPT1**
@@ -274,6 +277,7 @@ Configured OPT1 in GUI as follows:
    - Save → Apply.
 
 ![OPT1 Firewall Rules](./images/pfSense/pfSense-GUI/OPT-rule.png)
+
 *Figure 5: Firewall rule allowing all traffic on OPT1 interface*
 
 **Result:**
@@ -295,6 +299,7 @@ Enabled DHCP server for LAN in GUI:
    - Save.
 
 ![DHCP Server Configuration](./images/pfSense/pfSense-GUI/DHCP-server.png)
+
 *Figure 6: DHCP server configuration for LAN network*
 
 **Result:**
@@ -317,6 +322,7 @@ To ensure all domains and external services work:
    - Save.
 
 ![DNS Resolver Configuration](./images/pfSense/pfSense-GUI/DNS'resolve.png)
+
 *Figure 7: DNS Resolver configuration for internal and external DNS resolution*
 
 **Result:**
@@ -347,6 +353,7 @@ After all GUI settings, verified:
   - OPT1: `192.168.56.2/24`
 
 ![Interface Status Verification](./images/pfSense/pfSense-terminal/pfSense.png)
+
 *Figure 8: Final interface status showing all three networks configured correctly*
 
 
