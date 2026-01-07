@@ -9,6 +9,7 @@
 - [Baseline Management](#6-baseline-management)
 - [Red Team & Blue Team Support](#7-red-team--blue-team-support)
 - [Common Technical Challenges](#8-common-technical-challenges)
+- [Blue Team Engineering for Cybersecurity Defense](#blue-team-engineering-for-cybersecurity-defense)
 
 ---
 
@@ -172,4 +173,97 @@ Infrastructure must enable:
 **Resource Constraints**: Managed through optimized VM configurations (minimal Wazuh: 2GB RAM)  
 **Agent Installations**: Troubleshot using dependency verification and permission checks
 
+---
+
+## Blue Team Engineering for Cybersecurity Defense
+
+### 1. Introduction to Blue Team Operations
+
+Blue Team Engineering focuses on defensive security operations within enterprise environments. The role encompasses monitoring, detection, incident response, and security hardening to protect systems against adversarial threats.
+
+**Core Responsibilities:**
+- Configure and maintain security monitoring infrastructure
+- Develop detection rules and alert mechanisms
+- Respond to security incidents and remediate vulnerabilities
+- Validate security controls through verification testing
+
+### 2. Security Monitoring and Detection
+
+#### SIEM Configuration
+
+**Wazuh Agent Deployment** enables centralized visibility:
+- Windows endpoints: Sysmon integration for process/network monitoring
+- Linux endpoints: File Integrity Monitoring (FIM) for critical files
+- Network appliances: Syslog forwarding from pfSense
+
+#### Custom Detection Rules
+
+Effective detection requires rules mapped to attack techniques:
+- **Authentication monitoring**: SSH brute force detection (failed attempts)
+- **Privilege escalation**: Sudo abuse and NOPASSWD exploitation
+- **Command and Control**: PowerShell network connections, curl/wget activity
+- **Lateral movement**: SMB connections, service creation events
+
+#### MITRE ATT&CK Integration
+
+Detection rules should reference ATT&CK techniques:
+- T1110 (Brute Force) → Authentication failure alerts
+- T1548 (Abuse Elevation Control) → Sudo command monitoring
+- T1071 (Application Layer Protocol) → Network connection alerts
+- T1021 (Remote Services) → SMB/RDP connection logging
+
+### 3. Security Hardening
+
+#### Host-Based Hardening
+
+**Linux Systems:**
+- SSH configuration (`/etc/ssh/sshd_config`): Disable root login, limit auth attempts
+- Sudoers cleanup: Remove NOPASSWD entries
+- Password policies: Enforce strong, complex passwords
+- Artifact removal: Clean up attacker tools and persistence mechanisms
+
+**Windows Systems:**
+- Windows Defender Firewall: Enable and configure inbound rules
+- Block rules: Restrict connections from known-malicious IPs
+- Malware cleanup: Remove C2 agents and attack tools
+
+#### Network-Based Hardening
+
+**Firewall Rules (pfSense):**
+- Block outbound traffic to known C2 servers
+- Segment internal networks to limit lateral movement
+- Enable logging for visibility into blocked traffic
+
+### 4. Incident Response Methodology
+
+#### Attack → Detect → Fix → Verify
+
+The Blue Team follows a structured approach:
+1. **Attack**: Understand the threat through Red Team simulation
+2. **Detect**: Identify indicators of compromise via SIEM alerts
+3. **Fix**: Apply remediation measures (hardening, patching)
+4. **Verify**: Confirm fixes block repeat attacks
+
+#### Evidence Collection
+
+Proper documentation supports incident response:
+- Screenshot capture of before/after states
+- Log exports for forensic analysis
+- Configuration snapshots for audit trails
+
+### 5. Verification and Validation
+
+#### Post-Remediation Testing
+
+After applying fixes, Blue Team validates effectiveness:
+- Re-run attack scenarios to confirm blocks
+- Monitor SIEM for detection of blocked attempts
+- Document successful mitigations
+
+#### Defense-in-Depth Validation
+
+Multiple security layers should be verified:
+- Network layer: Firewall blocks malicious traffic
+- Host layer: Endpoint controls prevent execution
+- Application layer: Authentication controls deny access
 

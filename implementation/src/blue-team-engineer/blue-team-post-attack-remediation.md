@@ -6,6 +6,16 @@ Step-by-step remediation procedures to secure the environment following the Red 
 
 Images used by this document are stored under `./images/remediation/` in the repository.
 
+## Table of Contents
+
+1. [Scenario 1: SSH Brute Force Remediation](#1-scenario-1-ssh-brute-force-remediation)
+2. [Scenario 3: Privilege Escalation Remediation](#2-scenario-3-privilege-escalation-remediation)
+3. [Scenario 2: C2 Exfiltration Remediation](#3-scenario-2-c2-exfiltration-remediation)
+4. [Scenario 4: Lateral Movement Remediation](#4-scenario-4-lateral-movement-remediation)
+5. [Additional Linux Server Cleanup](#5-additional-linux-server-cleanup)
+6. [Post-Remediation Verification Summary](#6-post-remediation-verification-summary)
+7. [Credential Change](#7-credential-change)
+
 ---
 
 ## 1. Scenario 1: SSH Brute Force Remediation

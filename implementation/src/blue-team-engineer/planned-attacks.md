@@ -8,6 +8,15 @@ This document outlines the attack scenarios executed during Phase 1 (Baseline/We
 
 **Attack Flow:** Initial Access (SSH) → Credential Hunting → Privilege Escalation → Lateral Movement (PsExec/SMB) → Data Exfiltration → Cleanup
 
+## Table of Contents
+
+- [Scenario 1: "The Weakest Link" (SSH Brute Force)](#scenario-1-the-weakest-link-ssh-brute-force)
+- [Scenario 2: "Call Home" (C2 Exfiltration)](#scenario-2-call-home-c2-exfiltration)
+- [Scenario 3: "Root for Free" (Privilege Escalation)](#scenario-3-root-for-free-privilege-escalation)
+- [Scenario 4: "Lateral Movement" (Network Spreading)](#scenario-4-lateral-movement-network-spreading)
+- [Technology Summary by Scenario](#technology-summary-by-scenario)
+- [Attack & Defend Matrix (MITRE ATT&CK)](#attack--defend-matrix-mitre-attck)
+
 ---
 
 ## Scenario 1: "The Weakest Link" (SSH Brute Force)

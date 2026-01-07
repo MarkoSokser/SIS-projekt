@@ -2,6 +2,7 @@
 
 ## Table of Contents
 - [Role 1: Infrastructure Engineer – Summary](#role-1-infrastructure-engineer--summary)
+- [Role 2: Blue Team Engineer – Summary](#role-2-blue-team-engineer--summary)
 
 ---
 
@@ -74,3 +75,73 @@ The final infrastructure provides:
 - **Stable and documented** configuration enabling consistent testing across multiple attack phases
 
 All components are fully operational, interconnected, and prepared for Red Team adversary simulation activities following MITRE ATT&CK framework methodologies. The environment successfully balances realism (vulnerable by design) with control (monitored and recoverable), providing an ideal platform for cybersecurity training and technique validation.
+
+---
+
+## Role 2: Blue Team Engineer – Summary
+
+As the Blue Team Engineer for the TechNova cyber-range project, I successfully configured security monitoring, responded to Red Team attack simulations, and implemented comprehensive remediation measures to secure the environment.
+
+### Key Accomplishments
+
+**1. Pre-Attack Security Monitoring Setup**
+- Verified Wazuh agents operational on Windows Workstation (10.10.0.50) and Linux Server (10.10.0.51)
+- Deployed custom detection rules for SSH brute force, privilege escalation, PowerShell attacks, and lateral movement
+- Configured Sysmon on Windows for deep process and network visibility
+- Enabled File Integrity Monitoring (FIM) on Linux for critical files (`/etc/sudoers`, `/etc/shadow`, `/etc/crontab`)
+- Configured pfSense syslog forwarding to Wazuh SIEM
+- Validated telemetry pipeline with signal tests before Red Team engagement
+
+**2. Detection Rules Development**
+- Created MITRE ATT&CK-mapped detection rules:
+  - T1110 (Brute Force): SSH authentication failure monitoring
+  - T1548 (Sudo Abuse): NOPASSWD exploitation detection
+  - T1071 (C2 Communication): PowerShell and curl network connection alerts
+  - T1021 (Lateral Movement): SMB/RDP connection logging
+- Deployed pfSense decoder for firewall log parsing in Wazuh
+
+**3. Post-Attack Remediation (Phase 3)**
+
+*Scenario 1 – SSH Brute Force:*
+- Changed weak `webadmin` password to strong passphrase (`W3bAdm1nS3cure2025!`)
+- Hardened `/etc/ssh/sshd_config`: `PermitRootLogin no`, `MaxAuthTries 3`, `PermitEmptyPasswords no`
+
+*Scenario 2 – C2 Exfiltration:*
+- Created pfSense firewall rule blocking TCP traffic from infected host (10.10.0.50) to C2 server (10.10.0.53) on port 8888
+
+*Scenario 3 – Privilege Escalation:*
+- Removed `NOPASSWD` entry from `/etc/sudoers` using visudo
+- Deleted hardcoded credentials file (`/tmp/db_config.py`)
+- Rotated compromised `admin_lab` domain account password
+
+*Scenario 4 – Lateral Movement:*
+- Enabled Windows Defender Firewall on all profiles (Domain, Public, Private)
+- Created inbound block rules for CALDERA C2 (10.10.0.53) and compromised Linux server (10.10.0.51)
+- Blocked SMB (445), RPC (135), and WMI (5985/5986) ports from external hosts
+- Removed `splunkd.exe` CALDERA agent from Windows
+
+**4. Linux Server Cleanup**
+- Removed Impacket attack tools (`psexec.py`, `wmiexec.py`, `smbclient.py`)
+- Killed and removed CALDERA agent (`splunkd`) from Linux server
+- Verified no active C2 connections remained
+
+### Verification Results
+
+| Scenario | Vulnerability | Fix Applied | Status |
+|----------|---------------|-------------|--------|
+| SSH Brute Force | Weak Password | Password Changed + SSH Hardening | Verified |
+| Privilege Escalation | NOPASSWD Sudo | Entry Removed | Verified |
+| C2 Exfiltration | Open Outbound | pfSense Block Rule | Verified |
+| Lateral Movement | Firewall Disabled | Firewall Enabled + Block Rules | Verified |
+| Artifact Cleanup | Attack Tools & C2 Agent | Removed from both systems | Verified |
+
+### Technical Skills Demonstrated
+
+- SIEM configuration and custom rule development (Wazuh)
+- Endpoint security hardening (Linux SSH, Windows Firewall)
+- Network security controls (pfSense firewall rules)
+- Incident response and artifact removal
+- Attack → Detect → Fix → Verify methodology
+- MITRE ATT&CK framework mapping for detection and response
+
+All remediation measures were successfully validated through Red Team Phase 2 re-testing, confirming that previously successful attacks are now blocked by the implemented security controls.
