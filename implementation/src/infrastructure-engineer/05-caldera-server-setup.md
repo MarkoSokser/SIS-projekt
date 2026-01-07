@@ -2,6 +2,20 @@
 
 This guide covers the complete process of setting up a CALDERA server, solving all encountered problems, installing agents (Linux + Windows), connecting agents, and testing and troubleshooting.
 
+## Table of Contents
+- [VirtualBox VM Preparation (CALDERA-SRV)](#1-virtualbox-vm-preparation-caldera-srv)
+- [Ubuntu 24.04 Server Installation](#2-ubuntu-2404-server-installation)
+- [Static IP Address Configuration (Netplan)](#3-static-ip-address-configuration-netplan)
+- [Resolving DNS Issues (SERVFAIL / Domain Not Found)](#4-resolving-dns-issues-servfail--domain-not-found)
+- [CALDERA Installation](#5-caldera-installation)
+- [Starting CALDERA Server](#6-starting-caldera-server)
+- [Emergency Shell – Black Screen After Installation (Resolved)](#7-emergency-shell--black-screen-after-installation-resolved)
+- [Installing Sandcat Agents](#8-installing-sandcat-agents)
+- [Resolving "Unsupported SSH Version" Issue](#9-resolving-unsupported-ssh-version-issue)
+- [Troubleshooting (All Encountered Problems)](#10-troubleshooting-all-encountered-problems)
+- [Snapshot Creation](#11-snapshot-creation)
+- [Current Infrastructure State](#12-current-infrastructure-state)
+
 ---
 
 ## 1. VirtualBox VM Preparation (CALDERA-SRV)
@@ -27,6 +41,7 @@ Virtual cable connected: ✔
 ```
 
 ![CALDERA Network Adapter](./images/Caldera/network/internal.png)
+
 *Figure 33: Internal Network adapter configuration for CALDERA*
 
 **Purpose:**
@@ -81,6 +96,7 @@ network:
 ```
 
 ![Netplan Static IP Configuration](./images/Caldera/netplan/netplan.png)
+
 *Figure 34: Static IP configuration for CALDERA server*
 
 ### 3.3. Applying Configuration
@@ -120,6 +136,7 @@ Cache=no-negative
 ```
 
 ![Resolved.conf Configuration](./images/Caldera/resolved/resolved.png)
+
 *Figure 35: systemd-resolved configuration for domain resolution*
 
 ### 4.2. Restart Resolver
@@ -130,6 +147,7 @@ sudo resolvectl flush-caches
 resolvectl status
 ```
 ![Resolved.conf Configuration](./images/Caldera/resolved/resolve.png)
+
 *Figure 36: systemd-resolved configuration for domain resolution*
 
 ### 4.3. Test
@@ -140,6 +158,7 @@ nslookup technova.local
 ```
 
 ![Ping Test](./images/Caldera/ping/ping_test.png)
+
 *Figure 37: Ping test for technova.local*
 
 **Result:** DNS works correctly after this configuration
@@ -241,6 +260,7 @@ http://10.10.0.53:8888
 ```
 
 ![CALDERA Server Running](./images/Caldera/caldera_server/terminal_caldera.png)
+
 *Figure 38: CALDERA server running in terminal*
 
 **Default login:**
@@ -326,6 +346,7 @@ chmod +x splunkd
 
 ![Linux Agent Running](./images/Caldera/caldera_server/agent.png)
 ![Linux Agent Running](./images/Caldera/caldera_server/aggent.png)
+
 *Figure 40: Sandcat agent running on Linux server*
 
 **Result:**  Agent appears in CALDERA → Agents

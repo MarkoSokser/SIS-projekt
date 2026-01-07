@@ -8,6 +8,23 @@ This document covers all steps performed to set up a Windows Workstation in the 
 - Validation and testing
 - Snapshot creation
 
+## Table of Contents
+- [Creating VM in VirtualBox](#1-creating-vm-in-virtualbox)
+- [Network Adapter Configuration](#2-network-adapter-configuration)
+- [Attaching Windows ISO](#3-attaching-windows-iso)
+- [Windows Installation](#4-windows-installation)
+- [Network Adapter Verification](#5-network-adapter-verification)
+- [Obtaining IP Address from pfSense DHCP](#6-obtaining-ip-address-from-pfsense-dhcp)
+- [Manual DNS Configuration (If Needed)](#7-manual-dns-configuration-if-needed)
+- [Communication Testing](#8-communication-testing)
+- [Changing Hostname](#9-changing-hostname)
+- [Joining the Domain](#10-joining-the-domain)
+- [Testing Domain Login](#11-testing-domain-login)
+- [Vulnerable User Login (Attack Simulation)](#11-vulnerable-user-login-attack-simulation)
+- [Snapshot Creation](#12-snapshot-creation)
+- [Current Infrastructure State](#13-current-infrastructure-state)
+- [Common Issues and Solutions](#14-common-issues-and-solutions)
+
 ---
 
 ## 1. Creating VM in VirtualBox
@@ -42,6 +59,7 @@ Connected: ✔
 ```
 
 ![Workstation Network Adapter](./images/pfSense/network-adapters/Internal.png)
+
 *Figure 15: Internal Network adapter configuration*
 
 ---
@@ -117,6 +135,7 @@ DNS Server: 10.10.0.10 (DC)
 ```
 
 ![Network Status After DHCP](./images/WinWorkstation/ipconf/config.png)
+
 *Figure 16: Network adapter with valid IP from pfSense DHCP*
 
 ---
@@ -150,6 +169,7 @@ ping 10.10.0.1
 ---
 
 ![Ping Validation](./images/WinWorkstation/DNS_validation/ping_pfsense.png)
+
 *Figure 17: Ping test for pfSense LAN*
 
 ### Test 2: Ping Domain Controller
@@ -163,6 +183,7 @@ ping 10.10.0.10
 ---
 
 ![Ping Validation](./images/WinWorkstation/DNS_validation/ping_DC.png)
+
 *Figure 18: Ping test for Domain Controller*
 ### Test 3: DNS Lookup for Domain
 
@@ -180,6 +201,7 @@ Address: 10.10.0.10
 ```
 
 ![DNS Validation](./images/WinWorkstation/DNS_validation/nslookup.png)
+
 *Figure 19: DNS lookup verification for technova.local domain*
 
 ---
@@ -212,6 +234,7 @@ Password: Administrator1209!!
 ```
 
 ![Domain Join](./images/WinWorkstation/domain/domain.png)
+
 *Figure 20: Joining technova.local domain*
 
 ### Expected Result:
@@ -248,6 +271,7 @@ Password: ReadTeam1234??
 ```
 
 ![Domain Login](./images/WinWorkstation/accounts/accounts.png)
+
 *Figure 21: Domain login screen with TECHNOVA domain*
 
 **Expected:**  Successful login with domain credentials

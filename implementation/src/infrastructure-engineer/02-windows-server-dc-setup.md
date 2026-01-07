@@ -11,6 +11,21 @@ This document covers all steps performed to set up Windows Server 2019 as a Doma
 - Validation and snapshots
 - All problems encountered and solutions
 
+## Table of Contents
+- [Creating Windows Server 2019 VM](#1-creating-windows-server-2019-vm)
+- [VirtualBox Network Configuration](#2-virtualbox-network-configuration)
+- [Windows Server 2019 Core Installation](#3-windows-server-2019-core-installation)
+- [Initial Startup and Configuration](#4-initial-startup-and-configuration)
+- [Network Configuration (Critical Step)](#5-network-configuration-critical-step)
+- [Installing Active Directory Domain Services](#6-installing-active-directory-domain-services)
+- [Implementing Weak Passwords](#7-implementing-weak-passwords--why-its-important)
+- [Creating Users](#8-creating-users)
+- [Creating Vulnerable User with Fine-Grained Password Policy](#9-creating-vulnerable-user-with-fine-grained-password-policy)
+- [Problems and Solutions](#10-problems-and-solutions)
+- [Validation (Verifying Everything Works)](#11-validation-verifying-everything-works)
+- [Snapshot (Golden State)](#12-snapshot-golden-state)
+- [Current Infrastructure State](#13-current-infrastructure-state)
+
 ---
 
 ## 1. Creating Windows Server 2019 VM
@@ -52,6 +67,7 @@ Connected: ✔
 ```
 
 ![Network Adapter Configuration](./images/pfSense/network-adapters/Internal.png)
+
 *Figure 9: Internal Network adapter configuration for Domain Controller*
 
 **Why?**
@@ -94,6 +110,7 @@ sconfig
 This is the official Microsoft configuration menu.
 
 ![sconfig Menu](./images/WinServer2019/conf_menu/conf_menu.png)
+
 *Figure 10: Server Configuration (sconfig) main menu*
 
 ---
@@ -116,6 +133,7 @@ Gateway: 10.10.0.1
 ```
 
 ![Static IP Configuration](./images/WinServer2019/ipconf/IP-config.png)
+
 *Figure 11: Static IP configuration for Domain Controller*
 
 **Why?**
@@ -220,6 +238,7 @@ Add-ADGroupMember -Identity "Domain Admins" -Members "admin_lab"
 
 ![User Creation](./images/WinServer2019/users/Users.png)
 ![User Creation](./images/WinServer2019/users/User-admin.png)
+
 *Figure 12: Active Directory users created via PowerShell*
 
 ---
@@ -502,6 +521,7 @@ ipconfig /all
 
 ![DNS Validation](./images/WinServer2019/DNS_validation/nslookup.png)
 ![DNS Validation](./images/WinServer2019/DNS_validation/ipconfig.png)
+
 *Figure 13: DNS resolution verification*
 
 **Result:** DNS resolves correctly to `10.10.0.10`
@@ -528,6 +548,7 @@ DC-SERVER – clean AD + users + vulnerable employee
 - Team work distribution
 
 ![Snapshot Creation](./images/WinServer2019/snap/Snapshoot.png)
+
 *Figure 14: VirtualBox snapshot of clean Domain Controller state*
 
 ---

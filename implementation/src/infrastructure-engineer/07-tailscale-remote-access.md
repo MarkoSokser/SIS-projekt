@@ -86,6 +86,7 @@ Based on your Tailscale interface, the following IP addresses are assigned:
 3. Complete installation
 
 ![Tailscale Installation](./images/Tailscale/tailscale.png)
+
 *Figure 48: Tailscale installation on Windows*
 
 #### Verify Installation:
@@ -461,6 +462,7 @@ Tags are used to organize and control access to lab machines.
 }
 ```
  ![Tailscale SSH access](./images/Tailscale/SSH-acces.png)
+ 
 *Figure 77: Assigning SSH access to lab tag*
 
 **This means:**

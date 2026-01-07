@@ -7,6 +7,17 @@ This document describes setting up a Mini-Wazuh SIEM system optimized for runnin
 
 Mini-Wazuh uses only Wazuh Manager + minimal components, without full ElasticSearch stack, drastically reducing RAM consumption.
 
+## Table of Contents
+- [Creating VirtualBox VM (WAZUH-SIEM)](#1-creating-virtualbox-vm-wazuh-siem)
+- [Ubuntu Server Installation (Minimal Setup)](#2-ubuntu-server-installation-minimal-setup)
+- [Static IP Configuration](#3-static-ip-configuration)
+- [Installing Mini-Wazuh SIEM System](#4-installing-mini-wazuh-siem-system)
+- [Installing Agents on Target VMs](#5-installing-agents-on-target-vms)
+- [Agent Registration in SIEM](#6-agent-registration-in-siem)
+- [Testing SIEM Functionality](#7-testing-siem-functionality)
+- [Architecture Summary](#8-architecture-summary)
+- [Snapshot Creation](#9-snapshot-creation)
+
 ---
 
 ## 1. Creating VirtualBox VM (WAZUH-SIEM)
@@ -31,6 +42,7 @@ Cable Connected: ✔
 ```
 
 ![Wazuh Network Adapter](./images/pfSense/network-adapters/Internal.png)
+
 *Figure 41: Internal Network adapter configuration for Wazuh SIEM*
 
 ### 1.3. Loading ISO
@@ -82,6 +94,7 @@ network:
 ```
 
 ![Wazuh Static IP Configuration](./images/Wazuh/conf/conf.png)
+
 *Figure 42: Static IP configuration for Wazuh SIEM*
 
 ### Apply Configuration:
@@ -141,6 +154,7 @@ wazuh-remoted is running...
 wazuh-analysisd is running...
 ```
 ![Wazuh running](./images/Wazuh/running/wazuh.png)
+
 *Figure 43: Wazuh services running*
 
 ### 4.4. Important Log Locations
@@ -199,6 +213,7 @@ Get-Service WazuhSvc
 ```
 
 ![Windows Agent Service](./images/Wazuh/windows_runing/wazuh_win.png)
+
 *Figure 44: Wazuh service running on Windows*
 
 ---
@@ -254,6 +269,7 @@ systemctl status wazuh-agent
 ```
 
 ![Linux Agent Status](./images/Wazuh/linux_running/wazuh_linux.png)
+
 *Figure 45: Wazuh agent service status on Linux*
 
 ---
@@ -302,6 +318,7 @@ Available agents:
 ```
 
 ![Agent List](./images/Wazuh/agents/wazuh-agents.png)
+
 *Figure 646 List of connected agents in Wazuh*
 
 ---
@@ -346,6 +363,7 @@ sudo tail -f /var/ossec/logs/alerts/alerts.log
 ```
 
 ![Alert Monitoring](./images/Wazuh/agents/test.png)
+
 *Figure 47: Real-time alert monitoring in Wazuh logs*
 
 **View JSON format:**

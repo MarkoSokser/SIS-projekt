@@ -9,6 +9,16 @@ This document covers all steps performed to set up Ubuntu Server as a vulnerable
 - Privilege escalation vectors
 - Validation and snapshot
 
+## Table of Contents
+- [Linux Server Role in TechNova Lab](#1-linux-server-role-in-technova-lab)
+- [Creating VM in VirtualBox](#2-creating-vm-in-virtualbox)
+- [Ubuntu Server 24.04 LTS Installation](#3-ubuntu-server-2404-lts-installation)
+- [Network Configuration – TechNovaNet](#4-network-configuration--technovanet-101000024)
+- [Basic Packages and SSH Access](#5-basic-packages-and-ssh-access)
+- [Intentional Vulnerabilities on Linux Server](#6-intentional-vulnerabilities-on-linux-server)
+- [Snapshot and Use in CALDERA Lab](#7-snapshot-and-use-in-caldera-lab)
+- [Current Infrastructure State](#8-current-infrastructure-state)
+
 ---
 
 ## 1. Linux Server Role in TechNova Lab
@@ -50,6 +60,7 @@ Cable Connected: ✔
 ```
 
 ![Ubuntu Server Network Adapter](./images/pfSense/network-adapters/Internal.png)
+
 *Figure 22: Internal Network adapter configuration for Ubuntu Server*
 
 **Result:**
@@ -93,6 +104,7 @@ Password: ********
 ```
 
 ![Ubuntu Login Screen](./images/UbuntuServer/login/login.png)
+
 *Figure 23: Ubuntu Server TTY login screen*
 
 ### 3.3. Removing ISO
@@ -143,6 +155,7 @@ network:
 ```
 
 ![Netplan Configuration](./images/UbuntuServer/dhcp-conf/dhcp-conf.png)
+
 *Figure 24: Netplan YAML configuration file*
 
 3. **Save file** (Ctrl+O, Enter, Ctrl+X)
@@ -168,6 +181,7 @@ ip a
 - `enp0s3` is now **UP** with IP address: `10.10.0.51/24` (assigned by pfSense DHCP on LAN)
 
 ![Network Configuration After Netplan](./images/UbuntuServer/dhcp-conf/ip_a.png)
+
 *Figure 25: Network interface with IP from pfSense DHCP*
 
 #### Connectivity Test:
@@ -226,6 +240,7 @@ ssh vbubuntu@10.10.0.51
 - Entered password for `vbubuntu` and got shell
 
 ![SSH Connection Test](./images/UbuntuServer/testing_ping/ssh.png)
+
 *Figure 27: Successful SSH connection from Windows Workstation*
 
 **Confirmed:**
@@ -257,6 +272,7 @@ Added to sudo group:
 sudo usermod -aG sudo webadmin
 ```
 ![Vulnerable User Creation](./images/UbuntuServer/volnerable_user/user.png)
+
 *Figure 28: Successful user creation*
 
 #### 6.1.2. Sudo NOPASSWD (Privilege Escalation Paradise)
@@ -274,6 +290,7 @@ webadmin ALL=(ALL) NOPASSWD:ALL
 ```
 
 ![Sudo NOPASSWD Configuration](./images/UbuntuServer/nopasswd/nopasswd.png)
+
 *Figure 29: Sudoers configuration allowing passwordless sudo*
 
 **Result:**
@@ -348,6 +365,7 @@ curl http://localhost
 **Result:** HTML content of default Ubuntu Apache page displayed in terminal.
 
 ![Apache Default Page](./images/UbuntuServer/apache/apache.png)
+
 *Figure 30: Apache2 default page accessible on port 80*
 
 **Security Impact:**
@@ -407,6 +425,7 @@ Added at end:
 **Meaning:** Every minute, root executes `backup.sh`
 
 ![Cron Configuration](./images/UbuntuServer/cron_job/cron_job.png)
+
 *Figure 31: Root cron job configuration*
 
 #### 6.4.3. Cron Activity Verification
@@ -417,6 +436,7 @@ Journalctl output showed periodic CRON entries:
 sudo journalctl -u cron -f
 ```
 ![Cron output](./images/UbuntuServer/cron_job/cron_output.png)
+
 *Figure 32: Cron job activity in journalctl*
 
 **Result:** Execution of `/usr/local/bin/backup.sh` every 60 seconds observed.
