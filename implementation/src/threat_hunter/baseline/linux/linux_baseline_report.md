@@ -1,4 +1,15 @@
 # Linux Baseline Report (Pre-Attack)
+## Table of Contents
+- [Purpose & Role of the System](#1-purpose--role-of-the-system)
+- [Baseline Overview (Pre-Attack)](#2-baseline-overview-pre-attack)
+  - [Operating System and Identity](#21-operating-system-and-identity)
+  - [Users, Groups, and Privilege Model](#22-users-groups-and-privilege-model)
+  - [Authentication and Authorization Activity](#23-authentication-and-authorization-activity)
+  - [Endpoint Monitoring Status](#24-endpoint-monitoring-status)
+- [Collected Evidence](#3-collected-evidence)
+- [Baseline Behavioral Characteristics](#4-baseline-behavioral-characteristics)
+- [Key Detection Points](#5-key-detection-points)
+- [Identified Vulnerabilities and Limitations](#6-identified-vulnerabilities-and-limitations)
 
 ## 1. Purpose & Role of the System
 
@@ -45,6 +56,9 @@ The following sudoers configuration was confirmed:
 webadmin ALL=(ALL) NOPASSWD:ALL
 ```
 
+![Sudoers configuration showing NOPASSWD for webadmin](./images/sudoers.png)
+![User and group membership for webadmin](./images/webadmin.png)
+
 This configuration represents a deliberate privilege escalation vector within the lab environment and is documented as part of the baseline to support later attack-phase analysis.
 
 ---
@@ -61,6 +75,10 @@ Baseline authentication activity was analyzed using `/var/log/auth.log`. Observe
 
 These events are considered normal within the context of system usage and lab setup but provide an important reference for distinguishing legitimate activity from malicious behavior during attack execution.
 
+![Pre-attack auth.log snapshot](./images/authlog_downolad.png)
+![Authentication and cron activity](./images/authlog1.png)
+![Sudo authentication attempts and sessions](./images/authlog2.png)
+
 ---
 
 ### 2.4 Endpoint Monitoring Status
@@ -75,6 +93,8 @@ The Wazuh agent was confirmed to be active and running at the time of baseline c
   - execd
   - modulesd
 
+![Wazuh agent service status](./images/wazus_agents.png)
+
 This confirms that host-based telemetry from the Linux server is being forwarded to the SIEM and will be available for detection and correlation during attack scenarios.
 
 ---
@@ -84,12 +104,17 @@ This confirms that host-based telemetry from the Linux server is being forwarded
 The following baseline artefacts were collected from the Linux server prior to any red team activity:
 
 - Authentication and authorization log snapshot (`auth_pre_attack_report.log`)
-- Sudo configuration evidence (`/etc/sudoers` excerpt)
+- Sudo configuration evidence (`/etc/sudoers`)
 - User and group membership verification (`id webadmin`)
-- Sudo usage audit entries from `auth.log`
+- Sudo usage audit entries from `auth.log`)
 - Wazuh agent service status output
 
-All artefacts were preserved to enable accurate pre-attack versus post-attack comparison.
+![Auth log snapshot](./images/authlog_downolad.png)
+![Sudoers configuration](./images/sudoers.png)
+![User identity verification](./images/webadmin.png)
+![Authentication activity](./images/authlog1.png)
+![Sudo audit activity](./images/authlog2.png)
+![Wazuh agent status](./images/wazus_agents.png)
 
 ---
 
