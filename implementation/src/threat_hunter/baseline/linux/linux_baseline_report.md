@@ -1,4 +1,15 @@
 # Linux Baseline Report (Pre-Attack)
+## Table of Contents
+- [Purpose & Role of the System](#1-purpose--role-of-the-system)
+- [Baseline Overview (Pre-Attack)](#2-baseline-overview-pre-attack)
+  - [Operating System and Identity](#21-operating-system-and-identity)
+  - [Users, Groups, and Privilege Model](#22-users-groups-and-privilege-model)
+  - [Authentication and Authorization Activity](#23-authentication-and-authorization-activity)
+  - [Endpoint Monitoring Status](#24-endpoint-monitoring-status)
+- [Collected Evidence](#3-collected-evidence)
+- [Baseline Behavioral Characteristics](#4-baseline-behavioral-characteristics)
+- [Key Detection Points](#5-key-detection-points)
+- [Identified Vulnerabilities and Limitations](#6-identified-vulnerabilities-and-limitations)
 
 ## 1. Purpose & Role of the System
 

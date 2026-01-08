@@ -1,4 +1,14 @@
 # Final Attack Summary and Cross-System Analysis
+## Table of Contents
+- [Overview](#1-overview)
+- [Attack Chain Summary](#2-attack-chain-summary)
+- [Linux Host Findings](#3-linux-host-findings)
+- [Windows Host Findings](#4-windows-host-findings)
+- [Wazuh SIEM Analysis](#5-wazuh-siem-analysis)
+  - [Initial Detection Gap Explanation](#51-initial-detection-gap-explanation)
+  - [Post-Reconfiguration Results](#52-post-reconfiguration-results)
+- [Key Lessons Learned](#6-key-lessons-learned)
+- [Final Conclusion](#7-final-conclusion)
 
 ## 1. Overview
 

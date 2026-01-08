@@ -1,4 +1,16 @@
 # Linux Attack Report (Phase 1 – Host-Level Analysis)
+## Table of Contents
+- [Purpose & Scope of Analysis](#1-purpose--scope-of-analysis)
+- [System Context](#2-system-context)
+- [Initial Access](#3-initial-access)
+  - [SSH Authentication Using Valid Credentials](#31-ssh-authentication-using-valid-credentials)
+  - [Session Establishment](#32-session-establishment)
+- [Post-Access Activity (Noise Generation Test)](#4-post-access-activity-noise-generation-test)
+  - [Authentication Flooding](#41-authentication-flooding)
+  - [Failed Privilege Transitions](#42-failed-privilege-transitions)
+  - [Privileged Command Execution](#43-privileged-command-execution)
+- [Behavioral Comparison to Baseline](#5-behavioral-comparison-to-baseline)
+- [Conclusion](#6-conclusion)
 
 ## 1. Purpose & Scope of Analysis
 

@@ -1,4 +1,15 @@
 # Wazuh Detection Report (Phase 1 – Linux Host Monitoring)
+## Table of Contents
+- [Purpose & Scope of Analysis](#1-purpose--scope-of-analysis)
+- [Wazuh System Context](#2-wazuh-system-context)
+- [Alert Log Overview](#3-alert-log-overview)
+- [Authentication Failure Detection](#4-authentication-failure-detection)
+  - [SSH Authentication Failures](#41-ssh-authentication-failures)
+- [Privilege Escalation and Sudo Activity](#5-privilege-escalation-and-sudo-activity)
+  - [Successful Privileged Sessions](#51-successful-privileged-sessions)
+- [Alert Severity and Classification](#6-alert-severity-and-classification)
+- [Detection Coverage Assessment](#7-detection-coverage-assessment)
+- [Conclusion](#8-conclusion)
 
 ## 1. Purpose & Scope of Analysis
 

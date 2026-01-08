@@ -1,5 +1,12 @@
 # Final Phase 2 Summary – Hardening Verification  
 *(Linux + Windows + Wazuh SIEM)*
+## Table of Contents
+- [Objective](#objective)
+- [Linux Host (ubuntu-srv) – Summary](#linux-host-ubuntu-srv--summary)
+- [Windows Host (WIN-CLIENT) – Summary](#windows-host-win-client--summary)
+- [Wazuh SIEM – Summary](#wazuh-siem--summary)
+- [Overall Phase 2 Assessment](#overall-phase-2-assessment)
+- [Final Conclusion](#final-conclusion)
 
 ## Objective
 

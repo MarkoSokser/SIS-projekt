@@ -1,4 +1,12 @@
 # Phase 2 – Linux Host (ubuntu-srv) Hardening Verification Report
+## Table of Contents
+- [Scope and Context](#scope-and-context)
+- [Initial Access – SSH Authentication Attempt (FAILED)](#initial-access--ssh-authentication-attempt-failed)
+- [Privilege Escalation – sudo Abuse Attempt (FAILED)](#privilege-escalation--sudo-abuse-attempt-failed)
+- [Credential Access – Attempted `/etc/shadow` Access (NOT SUCCESSFUL)](#credential-access--attempted-etcsheadow-access-not-successful)
+- [Attack Phases Not Reached](#attack-phases-not-reached)
+- [Detection Coverage and Identified Gap](#detection-coverage-and-identified-gap)
+- [Conclusion (Linux Host)](#conclusion-linux-host)
 
 ## Scope and Context
 

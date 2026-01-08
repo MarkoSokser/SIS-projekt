@@ -1,4 +1,14 @@
 # pfSense Baseline Report
+## Table of Contents
+- [System Role and Context](#1-system-role-and-context)
+- [Interface and Network Overview](#2-interface-and-network-overview)
+- [Firewall Ruleset Baseline (pfctl -sr)](#3-firewall-ruleset-baseline-pfctl--sr)
+- [NAT Configuration Baseline (pfctl -sn)](#4-nat-configuration-baseline-pfctl--sn)
+- [Logging and Visibility](#5-logging-and-visibility)
+- [Observed Baseline Traffic Patterns](#6-observed-baseline-traffic-patterns)
+- [Security Observations and Potential Weaknesses](#7-security-observations-and-potential-weaknesses)
+- [Relevance for Threat Hunting](#8-relevance-for-threat-hunting)
+- [Baseline Status](#9-baseline-status)
 
 ## 1. System Role and Context
 pfSense acts as the central firewall and routing component within the lab environment. It controls traffic between WAN, LAN (10.10.0.0/24), and OPT networks, and provides visibility into network-level events prior to any simulated attacks.

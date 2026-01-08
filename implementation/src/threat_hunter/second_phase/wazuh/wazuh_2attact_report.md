@@ -1,4 +1,13 @@
 # Phase 2 – Wazuh SIEM Analysis (Hardening Verification)
+## Table of Contents
+- [Scope and Objective](#scope-and-objective)
+- [Authentication-Based Attack Detection (SUCCESSFUL)](#authentication-based-attack-detection-successful)
+  - [SSH Authentication Failure](#ssh-authentication-failure)
+- [Privilege Escalation Detection (SUCCESSFUL, WITH CONTEXT)](#privilege-escalation-detection-successful-with-context)
+- [Lateral Movement Detection – Network Perspective (BLOCKED)](#lateral-movement-detection--network-perspective-blocked)
+- [Correlation with Red Team Execution](#correlation-with-red-team-execution)
+- [Detection Gap Identified – Process Execution Visibility](#detection-gap-identified--process-execution-visibility)
+- [Conclusion (Wazuh SIEM)](#conclusion-wazuh-siem)
 
 ## Scope and Objective
 
