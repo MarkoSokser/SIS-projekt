@@ -6,15 +6,15 @@ A comprehensive cybersecurity training environment built for adversary emulation
 
 ##  Table of Contents
 
-- [Project Overview](#-project-overview)
+- [Project Overview](#project-overview)
 - [Key Features](#-key-features)
 - [Network Architecture](#-network-architecture)
-- [Team Roles](#-team-roles)
+- [Team Roles](#team-roles)
 - [Project Structure](#-project-structure)
 - [Technologies Used](#-technologies-used)
 - [Getting Started](#-getting-started)
 - [Documentation](#-documentation)
-- [License](#-license)
+- [Disclaimer](#-disclaimer)
 
 ---
 
