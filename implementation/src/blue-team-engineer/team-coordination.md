@@ -2,6 +2,15 @@
 
 This document outlines the responsibilities and tasks for each team member during the attack simulation exercise.
 
+## Table of Contents
+
+- [Timeline Overview](#timeline-overview)
+- [Roles and Responsibilities](#roles-and-responsibilities)
+  - [Red Team Engineer](#red-team-engineer)
+  - [Threat Analyst](#threat-analyst)
+  - [Blue Team Engineer](#blue-team-engineer)
+- [Communication Protocol](#communication-protocol)
+
 ## Timeline Overview
 
 1.  **Phase 0: Blue Team Setup**  Blue Team Engineer prepares monitoring.
