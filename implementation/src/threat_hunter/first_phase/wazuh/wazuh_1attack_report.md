@@ -43,7 +43,10 @@ Total number of alerts recorded:
 
 693 entries confirmed via alert log line count.
 
-This is illustrated in the screenshot `alert_logs.png`, which shows the total number of alert entries present in the Wazuh alert log.
+This is illustrated in the screenshot shown below, which displays the total number of alert entries present in the Wazuh alert log.
+
+![Total number of Wazuh alerts](./images/alert_logs.png)
+
 
 ---
 
@@ -60,10 +63,14 @@ Example alert evidence:
 pam_unix(sshd:auth): authentication failure; user=webadmin  
 Failed password for webadmin from 127.0.0.1
 
-This activity is visible in:
-- `autentification_failure.png`
-- `wabadmin_autentification_failure1.png`
-- `wabadmin_autentification_failure2.png`
+This activity is visible in the screenshots below, which document multiple SSH authentication failures associated with the `webadmin` account.
+
+![SSH authentication failure – overview](./images/autentification_failure.png)
+
+![SSH authentication failure – webadmin attempt 1](./images/wabadmin_autentification_failure1.png)
+
+![SSH authentication failure – webadmin attempt 2](./images/wabadmin_autentification_failure2.png)
+
 
 These screenshots show multiple failed authentication attempts being captured and logged by Wazuh.
 
@@ -87,9 +94,12 @@ Example alert evidence includes:
 PAM: Login session opened  
 Successful sudo to ROOT executed
 
-These events are shown in:
-- `alert_log_detail1.png`
-- `alert_log_detail2.png`
+These events are shown in the screenshots below, which capture Wazuh alerts related to PAM session handling and successful sudo execution.
+
+![Wazuh alert – PAM login session opened](./images/alert_log_detail1.png)
+
+![Wazuh alert – successful sudo execution](./images/alert_log_detail2.png)
+
 
 The alerts confirm that Wazuh detected:
 - elevation to root privileges,

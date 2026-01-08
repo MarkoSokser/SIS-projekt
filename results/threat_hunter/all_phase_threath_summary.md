@@ -30,9 +30,11 @@ The assessment was conducted through a structured, three-phase approach:
 
 Each phase was documented independently and is referenced throughout this report for traceability and verification:
 
-- Baseline summary: `threat_hunter/baseline/summary.md`
-- Phase 1 summary: `threat_hunter/first_phase/summary.md`
-- Phase 2 summary: `threat_hunter/second_phase/summary.md`
+- Baseline summary: [baseline/summary.md](../../implementation/src/threat_hunter/baseline/summary.md)
+- Phase 1 summary: [first_phase/summary.md](../../implementation/src/threat_hunter/first_phase/summary.md)
+- Phase 2 summary: [second_phase/summary.md](../../implementation/src/threat_hunter/second_phase/summary.md)
+
+
 
 This final report synthesizes findings from all three phases into a single, end-to-end security assessment.
 

@@ -39,7 +39,7 @@ This confirms that:
 - Failed login attempts are properly logged and visible for detection
 
 **Evidence:**  
-See screenshot: `failed_password.png`
+![Failed SSH authentication – webadmin](./images/failed_password.png)
 
 ---
 
@@ -58,7 +58,7 @@ This demonstrates that:
 - Hardening controls (sudo password enforcement) are operating as intended
 
 **Evidence:**  
-See screenshot: `privelage_escalation.png`
+![Failed sudo privilege escalation attempt](./images/privelage_escalation.png)
 
 ---
 
@@ -76,7 +76,7 @@ This confirms that:
 - Credential access techniques were unsuccessful
 
 **Evidence:**  
-See screenshot: `dump_shadow.png`
+![Attempted access to /etc/shadow – unsuccessful](./images/dump_shadow.png)
 
 ---
 

@@ -54,9 +54,11 @@ These events indicate repeated failed authentication attempts using legitimate a
 
 ### Evidence
 
-- Screenshot reference: `security_4025_1.png`
-- Screenshot reference: `security_4025_2.png`
-- Screenshot reference: `security_4025_3.png`
+![Windows Security Event 4625 – failed authentication (1)](./images/security_4025_1.png)
+
+![Windows Security Event 4625 – failed authentication (2)](./images/security_4025_2.png)
+
+![Windows Security Event 4625 – failed authentication (3)](./images/security_4025_3.png)
 
 ---
 
@@ -81,9 +83,11 @@ These events confirm that valid credentials were successfully used to access the
 
 ### Evidence
 
-- Screenshot reference: `security_4624_1.png`
-- Screenshot reference: `security_4624_2.png`
-- Screenshot reference: `security_4624_4.png`
+![Windows Security Event 4624 – successful logon (1)](./images/security_4624_1.png)
+
+![Windows Security Event 4624 – successful logon (2)](./images/security_4624_2.png)
+
+![Windows Security Event 4624 – successful logon (3)](./images/security_4624_4.png)
 
 ---
 
@@ -104,10 +108,13 @@ These patterns are strongly indicative of malicious service-based persistence ra
 
 ### Evidence
 
-- Screenshot reference: `system_7045_1.png`
-- Screenshot reference: `system_7045_2.png`
-- Screenshot reference: `system_7045_3.png`
-- Screenshot reference: `system_7045_4.png`
+![Service creation event 7045 – persistence artifact (1)](./images/system_7045_1.png)
+
+![Service creation event 7045 – persistence artifact (2)](./images/system_7045_2.png)
+
+![Service creation event 7045 – persistence artifact (3)](./images/system_7045_3.png)
+
+![Service creation event 7045 – persistence artifact (4)](./images/system_7045_4.png)
 
 ---
 

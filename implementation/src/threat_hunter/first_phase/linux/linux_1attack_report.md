@@ -49,7 +49,10 @@ Evidence from /var/log/auth.log.2.gz:
 2025-12-17T19:52:47 ubuntu-srv sshd[1881]:  
 Accepted password for webadmin from 10.10.0.50 port 50213 ssh2
 
-This activity is visually confirmed in the screenshot `log_attact.png`, which shows the extracted SSH authentication event from the rotated Linux authentication log.
+This activity is visually confirmed in the screenshot shown below, which captures the extracted SSH authentication event from the rotated Linux authentication log.
+
+![SSH authentication event from rotated auth.log](./images/log_attact.png)
+
 
 This event confirms:
 - use of a legitimate user account,
@@ -68,7 +71,10 @@ Evidence:
 
 pam_unix(sshd:session): session opened for user webadmin (uid=1001)
 
-This behavior is illustrated in the screenshot `session.png`, which shows the PAM session creation event associated with the SSH login.
+This behavior is illustrated in the screenshot shown below, which displays the PAM session creation event associated with the SSH login.
+
+![PAM session opened for SSH login](./images/session.png)
+
 
 This confirms full shell access to the Linux system under the compromised user account.
 
@@ -95,7 +101,10 @@ Example evidence:
 
 Failed password for webadmin from 127.0.0.1 port 36246 ssh2
 
-This authentication noise is visible in the screenshot `logs.png`, which captures repeated failed authentication attempts recorded in the Linux authentication logs.
+This authentication noise is visible in the screenshot shown below, which captures repeated failed authentication attempts recorded in the Linux authentication logs.
+
+![Repeated failed SSH authentication attempts](./images/logs.png)
+
 
 These events exceed baseline authentication behavior and indicate intentional authentication abuse.
 

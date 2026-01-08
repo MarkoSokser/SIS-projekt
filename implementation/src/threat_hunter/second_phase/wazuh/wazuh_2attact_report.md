@@ -40,7 +40,7 @@ This event corresponds to a **failed credential access attempt**, consistent wit
 The detection confirms that Wazuh correctly ingests and correlates SSH authentication failures on Linux endpoints.
 
 **Evidence:**  
-See screenshot: `alerts_log.png`
+![Wazuh alerts – authentication and sudo activity](./images/alerts_log.png)
 
 ---
 
@@ -61,7 +61,7 @@ Therefore:
 This distinction highlights proper analyst-driven validation and correct alert interpretation.
 
 **Evidence:**  
-See screenshot: `alerts_log.png`
+![Wazuh alerts – authentication and sudo activity](./images/alerts_log.png)
 
 ---
 
@@ -90,7 +90,7 @@ This confirms that:
 - Firewall segmentation successfully prevented progression of the attack
 
 **Evidence:**  
-See screenshot: `filterlog_for_lateral.png`
+![pfSense filterlog – no lateral movement detected](./images/filterlog_for_lateral.png)
 
 ---
 

@@ -27,6 +27,10 @@ Observed interfaces:
 
 Private and bogon networks are explicitly blocked on the WAN interface, indicating a hardened perimeter configuration.
 
+![pfSense firewall rules overview – WAN/LAN/OPT](./images/Firewall_rules1.png)
+![pfSense firewall rules – detailed view](./images/Firewall_rules2.png)
+![pfSense firewall rules – additional rules](./images/Firewall_rules3.png)
+
 ---
 
 ## 3. Firewall Ruleset Baseline (pfctl -sr)
@@ -42,6 +46,8 @@ The ruleset reflects a defensive-first posture with minimal exposed services.
 These behaviors are visible in the firewall rules screenshots
 (`Firewall_rules1.png`, `Firewall_rules2.png`, `Firewall_rules3.png`).
 
+![pfctl -sr firewall rules output](./images/Firewall_rules1.png)
+
 ---
 
 ## 4. NAT Configuration Baseline (pfctl -sn)
@@ -52,6 +58,9 @@ NAT behavior observed:
 
 This confirms that no internal services are directly exposed to the WAN.
 This can be seen in the screenshot `nat.png`.
+
+![pfSense NAT configuration (pfctl -sn)](./images/nat.png)
+
 ---
 
 ## 5. Logging and Visibility
@@ -63,6 +72,8 @@ Logging configuration:
 
 This provides sufficient telemetry for network-based detection during attacks.
 
+![pfSense syslog configuration for Wazuh](./images/syslog(for Wazuh).png)
+
 ---
 
 ## 6. Observed Baseline Traffic Patterns
@@ -73,6 +84,9 @@ From filter.log:
 - Frequent blocked multicast/SSDP traffic on WAN (expected background noise)
 
 No anomalous inbound connections were observed in the baseline window.
+
+![pfSense firewall log – baseline traffic](./images/firewall_log1.png)
+![pfSense firewall log – continued baseline traffic](./images/firewall_log2.png)
 
 ---
 
