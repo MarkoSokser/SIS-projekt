@@ -105,11 +105,11 @@ This represents a **Detection Gap**, not a failure of existing detection logic.
 
 The Phase 2 hardening validation for `ubuntu-srv` confirms that the system is resilient against the tested attack paths:
 
-- Initial Access: ❌ Blocked  
-- Privilege Escalation: ❌ Blocked  
-- Credential Access: ❌ Blocked  
-- Lateral Movement: ❌ Not reached  
-- Data Exfiltration: ❌ Not reached  
+- Initial Access:  Blocked  
+- Privilege Escalation:  Blocked  
+- Credential Access:  Blocked  
+- Lateral Movement:  Not reached  
+- Data Exfiltration: Not reached  
 
 Security controls successfully prevented escalation and progression of the attack. Detection mechanisms effectively captured authentication-related abuse, while process-level visibility remains an identified improvement area for future enhancement.
 

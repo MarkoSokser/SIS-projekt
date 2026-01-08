@@ -58,7 +58,7 @@ Key characteristics included:
 - No malicious persistence or artifacts
 
 The full baseline context and observations are documented in:  
-📄 **`baseline/summary.md`**
+ **`baseline/summary.md`**
 
 This baseline enabled accurate differentiation between:
 - normal system behavior,
@@ -80,7 +80,7 @@ Phase 1 simulated a realistic multi-stage attack using **MITRE CALDERA**, target
 - Detection noise deliberately generated
 
 Detailed attack execution and evidence are documented in:  
-📄 **`first_phase/summary.md`**
+ **`first_phase/summary.md`**
 
 ---
 
@@ -92,7 +92,7 @@ Detailed attack execution and evidence are documented in:
 - Full kill chain execution achieved
 
 Windows-side compromise details and evidence are available in:  
-📄 **`first_phase/summary.md`**
+ **`first_phase/summary.md`**
 
 ---
 
@@ -103,7 +103,7 @@ Windows-side compromise details and evidence are available in:
 - Once enabled, Wazuh successfully detected authentication, escalation, and persistence artifacts
 
 Phase 1 detection behavior and limitations are documented in:  
-📄 **`first_phase/summary.md`**
+ **`first_phase/summary.md`**
 
 ---
 
@@ -119,7 +119,7 @@ Phase 2 re-executed the same attack techniques against the hardened environment 
 - Attack chain terminated early
 
 Linux hardening validation is documented in:  
-📄 **`second_phase/summary.md`**
+ **`second_phase/summary.md`**
 
 ---
 
@@ -131,7 +131,7 @@ Linux hardening validation is documented in:
 - Windows host remained uncompromised
 
 Windows containment validation is documented in:  
-📄 **`second_phase/summary.md`**
+ **`second_phase/summary.md`**
 
 ---
 
@@ -143,7 +143,7 @@ Windows containment validation is documented in:
 - Correlation aligned with CALDERA execution output
 
 SIEM behavior and validation details are documented in:  
-📄 **`second_phase/summary.md`**
+ **`second_phase/summary.md`**
 
 ---
 
@@ -159,7 +159,7 @@ This gap:
 - represents a clear future improvement opportunity.
 
 This limitation and its impact are discussed in detail in:  
-📄 **`second_phase/summary.md`**
+ **`second_phase/summary.md`**
 
 ---
 
@@ -167,13 +167,13 @@ This limitation and its impact are discussed in detail in:
 
 | Security Aspect              | Phase 1 | Phase 2 |
 |-----------------------------|---------|---------|
-| Initial Access              | ❌ Allowed | ✅ Blocked |
-| Privilege Escalation        | ❌ Allowed | ✅ Blocked |
-| Credential Access           | ❌ Allowed | ✅ Blocked |
-| Lateral Movement            | ❌ Successful | ✅ Contained |
-| Persistence                 | ❌ Established | ✅ Prevented |
-| Windows Compromise          | ❌ Yes | ✅ No |
-| SIEM Detection Accuracy     | ⚠️ Partial | ✅ Reliable |
+| Initial Access              | Allowed | Blocked |
+| Privilege Escalation        | Allowed | Blocked |
+| Credential Access           | Allowed | Blocked |
+| Lateral Movement            | Successful | Contained |
+| Persistence                 | Established | Prevented |
+| Windows Compromise          | Yes | No |
+| SIEM Detection Accuracy     | Partial | Reliable |
 
 (Individual phase details: `first_phase/summary.md`, `second_phase/summary.md`)
 
@@ -205,9 +205,9 @@ This assessment demonstrates a complete security lifecycle:
 Preventive controls, network segmentation, and SIEM correlation collectively delivered a hardened and resilient environment, with clearly identified next steps for detection maturity.
 
 **Final Assessment Result:**  
-✅ Security objectives achieved  
-✅ Attack paths eliminated  
-⚠️ Detection visibility improvements identified  
+Security objectives achieved  
+Attack paths eliminated  
+Detection visibility improvements identified  
 
 This report represents the consolidated conclusion of all assessment phases.
 

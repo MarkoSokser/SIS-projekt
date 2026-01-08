@@ -91,12 +91,12 @@ This gap is clearly scoped and does not undermine overall security posture.
 
 | Security Objective          |              Result               |
 |-----------------------------|-----------------------------------|
-| Initial Access Prevention   | ✅ Successful |
-| Privilege Escalation Block  | ✅ Successful |
-| Lateral Movement Containment| ✅ Successful |
-| Endpoint Compromise         | ❌ Not Achieved |
-| SIEM Detection Accuracy     | ✅ Reliable |
-| Detection Coverage Gaps     | ⚠️ Identified (Process telemetry) |
+| Initial Access Prevention   |  Successful |
+| Privilege Escalation Block  |  Successful |
+| Lateral Movement Containment|  Successful |
+| Endpoint Compromise         |  Not Achieved |
+| SIEM Detection Accuracy     |  Reliable |
+| Detection Coverage Gaps     |  Identified (Process telemetry) |
 
 ---
 
