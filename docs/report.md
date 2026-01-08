@@ -3,6 +3,7 @@
 ## Table of Contents
 - [Role 1: Infrastructure Engineer – Summary](#role-1-infrastructure-engineer--summary)
 - [Role 2: Blue Team Engineer – Summary](#role-2-blue-team-engineer--summary)
+- [Role 4: Threat Analyst – Summary](#role-4-threat-analyst--summary)
 
 ---
 
@@ -145,3 +146,112 @@ As the Blue Team Engineer for the TechNova cyber-range project, I successfully c
 - MITRE ATT&CK framework mapping for detection and response
 
 All remediation measures were successfully validated through Red Team Phase 2 re-testing, confirming that previously successful attacks are now blocked by the implemented security controls.
+
+---
+
+
+
+
+
+
+
+
+
+## Role 4: Threat Analyst – Summary
+
+As the Threat Analyst for the TechNova cyber-range project, I was responsible for **analyzing Red Team attack activity**, **validating detection accuracy**, and **verifying the effectiveness of security controls** using telemetry-driven investigation rather than assumptions or tool output alone.
+
+The role focused on correlating **endpoint logs, network telemetry, and SIEM data** to determine whether attacks truly succeeded or were effectively blocked, particularly during Phase 2 (Hardening Verification).
+
+---
+
+### Key Accomplishments
+
+**1. Threat Hunting and Attack Validation**
+
+- Conducted detailed threat hunting across Linux, Windows, and firewall telemetry
+- Analyzed raw Wazuh data (`alerts.log`, `archives.log`) rather than relying solely on dashboard alerts
+- Validated each stage of the attack chain (Initial Access → Privilege Escalation → Lateral Movement → Exfiltration)
+- Confirmed whether attack stages were:
+  - attempted,
+  - blocked,
+  - or not reached
+- Distinguished between true attack activity and background system noise (cron jobs, multicast traffic, analyst actions)
+
+---
+
+**2. Phase 1 – Attack Confirmation**
+
+- Verified successful attack execution during Phase 1 using:
+  - SSH authentication logs on Linux
+  - Sudo privilege escalation evidence
+  - Network telemetry indicating lateral movement
+  - Windows-side agent execution and persistence
+- Correlated Red Team activity with Wazuh alerts to confirm:
+  - initial detection gaps,
+  - low-noise credential-based attack behavior,
+  - and post-compromise visibility
+
+This analysis confirmed that the Phase 1 attack chain was fully successful under baseline conditions.
+
+---
+
+**3. Phase 2 – Hardening Verification Through Telemetry**
+
+- Re-analyzed the same attack techniques after remediation
+- Confirmed failed SSH authentication attempts for `webadmin`
+- Confirmed blocked sudo privilege escalation attempts
+- Verified that `/etc/shadow` access was not achieved
+- Analyzed pfSense `filterlog` data to validate:
+  - absence of SMB/RPC traffic (ports 445/135)
+  - effective network segmentation
+- Confirmed that Windows hosts were not reached or compromised
+
+The absence of lateral movement and Windows-side telemetry was correctly interpreted as **successful containment**, not missing data.
+
+---
+
+**4. Detection Accuracy and False Positive Avoidance**
+
+- Identified and excluded analyst-generated events (e.g., sudo log inspection) from attack attribution
+- Differentiated ephemeral source ports from true destination service ports in firewall logs
+- Prevented misclassification of benign UDP traffic as lateral movement attempts
+- Ensured all conclusions were based on observable evidence rather than assumptions
+
+This approach prevented false positives and strengthened the credibility of the final assessment.
+
+---
+
+**5. Detection Gap Identification**
+
+- Identified a detection gap related to Linux process execution visibility
+- Confirmed that execution of failed attack tooling (e.g., `python3 psexec.py`, `nc`) was not observable in Wazuh
+- Determined the root cause as missing Linux process execution telemetry (auditd / execve logging)
+- Correctly classified this limitation as a **visibility gap**, not a failure of prevention or SIEM functionality
+
+This finding provides a clear roadmap for future detection maturity improvements.
+
+---
+
+### Technical Skills Demonstrated
+
+- Threat hunting methodology and hypothesis-driven analysis
+- SIEM log analysis (Wazuh alerts and archives)
+- Linux and Windows log interpretation
+- Firewall telemetry analysis (pfSense filterlog)
+- MITRE ATT&CK kill chain validation
+- False positive reduction and evidence-based reporting
+- Cross-team correlation (Red Team execution vs defensive telemetry)
+
+---
+
+### Final Assessment Contribution
+
+The Threat Analyst role provided the **final validation layer** between offensive simulation and defensive assurance. By correlating attack execution with system telemetry, I confirmed that:
+
+- Phase 1 attacks were genuinely successful under baseline conditions
+- Phase 2 hardening measures effectively blocked all critical attack paths
+- Detection mechanisms operated correctly within their configured scope
+- Remaining detection gaps were accurately identified and scoped
+
+This analysis ensured that the final project conclusions were **technically sound, defensible, and evidence-based**, completing the full security lifecycle of the TechNova cyber-range project.
