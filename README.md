@@ -4,7 +4,7 @@ A comprehensive cybersecurity training environment built for adversary emulation
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [Project Overview](#-project-overview)
 - [Key Features](#-key-features)
