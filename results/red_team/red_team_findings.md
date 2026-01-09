@@ -42,7 +42,7 @@ In Phase 1 (Baseline), Red Team achieved full domain compromise starting from a 
 ### Attack Scenario 3: Data Exfiltration
 
 **Vulnerability:** Unrestricted Outbound Traffic  
-**Attack Result:** SUCCESS. Sensitive data (`Exfil_Proof.txt`) was exfiltrated to the C2 server via HTTP POST (Port 8888).
+**Attack Result:** ATTEMPTED. Data exfiltration was attempted to the C2 server via HTTP POST (Port 8888), but server error prevented successful upload.
 
 **Key Observation:**
 - No egress filtering on the gateway firewall.
@@ -89,7 +89,7 @@ Summary of attack success rates before and after hardening.
 | **Privilege Escalation** | T1548.003 | 🟢 SUCCESS | 🔴 FAILED (Timeout) | ✅ **Effective** |
 | **Credential Theft** | T1003 | 🟢 SUCCESS | 🔴 FAILED (No File) | ✅ **Effective** |
 | **Lateral Movement** | T1021.002 | 🟢 SUCCESS | 🔴 FAILED (Blocked) | ✅ **Effective** |
-| **Data Exfiltration** | T1041 | 🟢 SUCCESS | ⚪ SKIPPED | ✅ **Effective** (Indirectly) |
+| **Data Exfiltration** | T1041 | 🟢 ATTEMPTED (server error) | ⚪ SKIPPED | ✅ **Effective** (Indirectly) |
 
 **Overall Status:** The critical path to total domain compromise has been successfully closed.
 
