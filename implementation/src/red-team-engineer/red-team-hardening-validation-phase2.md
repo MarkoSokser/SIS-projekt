@@ -3,11 +3,11 @@
 This document details the re-execution of attack scenarios against the hardened infrastructure to validate the effectiveness of Blue Team defenses.
 
 ## Table of Contents
+
 1. [Objective](#1-objective)
 2. [Execution Log (Hardening Test)](#2-execution-log-hardening-test)
 3. [Findings & Security Assessment](#3-findings--security-assessment)
 4. [Conclusion](#4-conclusion)
-    * [4.1. Technical Challenges Encountered](#41-technical-challenges-encountered)
 
 ## 1. Objective
 To execute the exact same TTPs (Tactics, Techniques, and Procedures) as in Phase 1 using the `webadmin` user context and verify that the security controls implemented by the Blue Team successfully block or detect the attacks.
@@ -44,10 +44,12 @@ The operation was executed against the target environment. Below is the detailed
 **A. Operation Overview**
 The operation log shows a cascade of timeouts and failures for critical offensive actions, preventing the attack from leaving the Linux host.
 ![Operation Overview](./images/phase2/phase2_ops_overview.png)
+*Figure 1: The operation log shows a cascade of timeouts and failures for critical offensive actions*
 
 **B. Lateral Movement Block**
 The connection to the target Windows host (10.10.0.50) failed with `No route to host`, confirming network segmentation rules are active.
 ![Lateral Block](./images/phase2/phase2_lateral_blocked.png)
+*Figure 2: The connection to the target Windows host failed with No route to host*
 
 ---
 
