@@ -9,6 +9,7 @@
 - [Baseline Management](#6-baseline-management)
 - [Red Team & Blue Team Support](#7-red-team--blue-team-support)
 - [Common Technical Challenges](#8-common-technical-challenges)
+- [Red Team Engineering for Cybersecurity Offense](#red-team-engineering-for-cybersecurity-offense)
 - [Blue Team Engineering for Cybersecurity Defense](#blue-team-engineering-for-cybersecurity-defense)
 - [Threat Hunting and SIEM-Based Attack Validation](#threat-hunting-and-siem-based-attack-validation)
 ---
@@ -266,6 +267,101 @@ Multiple security layers should be verified:
 - Network layer: Firewall blocks malicious traffic
 - Host layer: Endpoint controls prevent execution
 - Application layer: Authentication controls deny access
+
+---
+
+## Red Team Engineering for Cybersecurity Offense
+
+### 1. Introduction to Red Team Operations
+
+Red Team Engineering focuses on offensive security operations through adversary simulation. The role involves planning, executing, and validating attack scenarios to test defensive capabilities in controlled environments.
+
+**Core Responsibilities:**
+- Develop attack chains using MITRE ATT&CK framework
+- Execute automated adversary emulation with tools like CALDERA
+- Validate vulnerabilities and bypass detection mechanisms
+- Document attack success and provide remediation feedback
+
+### 2. Adversary Emulation Frameworks
+
+#### CALDERA Overview
+
+**MITRE CALDERA** is an open-source framework for automated adversary emulation:
+- **Agents**: Lightweight implants deployed on target systems
+- **Abilities**: Modular attack techniques (e.g., PsExec, credential dumping)
+- **Adversaries**: Pre-configured attack profiles chaining multiple abilities
+- **Operations**: Real-time execution and monitoring of campaigns
+
+#### Key Components
+
+- **Fact Sources**: Dynamic variables for targeting (e.g., IP addresses, credentials)
+- **Planners**: Logic for ability sequencing and error handling
+- **Manual Mode**: Direct command execution for complex scenarios
+
+### 3. Attack Chain Development
+
+#### MITRE ATT&CK Integration
+
+Red Team operations follow the ATT&CK kill chain:
+- **Reconnaissance** (T1595): Network scanning and service enumeration
+- **Initial Access** (T1078): Credential-based entry via SSH/weak passwords
+- **Execution** (T1059): Command execution on compromised hosts
+- **Persistence** (T1053): Cron jobs or service creation
+- **Privilege Escalation** (T1548): Sudo abuse or credential theft
+- **Defense Evasion** (T1070): Log clearing or tool cleanup
+- **Credential Access** (T1003): Dumping hashes or finding plaintext secrets
+- **Discovery** (T1083): System/network enumeration
+- **Lateral Movement** (T1021): SMB/PsExec to pivot between hosts
+- **Collection** (T1560): Data gathering for exfiltration
+- **Exfiltration** (T1041): Data transfer via HTTP/C2 channels
+- **Command and Control** (T1071): Beaconing to C2 servers
+
+#### Scenario Planning
+
+Attack scenarios are designed to:
+- Test specific vulnerabilities (e.g., hardcoded credentials)
+- Demonstrate real-world techniques (e.g., living-off-the-land)
+- Generate telemetry for Blue Team detection
+- Validate hardening effectiveness in Phase 2
+
+### 4. Tooling and Execution
+
+#### External Tools Integration
+
+Red Team often requires external tools not present on targets:
+- **Impacket**: For Windows protocol abuse (SMB, WMI)
+- **SSHpass**: For automated SSH authentication
+- **Curl/Wget**: For data exfiltration
+
+**Deployment Strategy:**
+- Pre-stage tools via manual upload or web download
+- Execute from memory where possible to avoid detection
+- Clean up artifacts post-operation
+
+#### Noise Generation for Testing
+
+To stress-test detection:
+- Add deliberate alerting actions (e.g., failed logins, service creation)
+- Extend profiles with noisy abilities
+- Monitor SIEM responses to validate rule effectiveness
+
+### 5. Validation and Reporting
+
+#### Success Metrics
+
+Attack validation focuses on:
+- **Technical Success**: Ability execution without errors
+- **Kill Chain Completion**: Full chain from initial access to exfiltration
+- **Detection Evasion**: Absence of alerts during silent operations
+- **Hardening Bypass**: Attempts to circumvent Phase 2 defenses
+
+#### Feedback to Blue Team
+
+Red Team provides:
+- Detailed execution logs
+- Vulnerability exploitation proofs
+- Remediation recommendations
+- Phase 2 re-test results
 
 ---
 
