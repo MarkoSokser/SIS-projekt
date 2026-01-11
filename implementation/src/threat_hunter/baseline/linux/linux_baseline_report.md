@@ -57,10 +57,12 @@ webadmin ALL=(ALL) NOPASSWD:ALL
 ```
 
 ![Sudoers configuration showing NOPASSWD for webadmin](./images/sudoers.png)
+*Figure 1: Sudoers configuration showing NOPASSWD for webadmin*
 ![User and group membership for webadmin](./images/webadmin.png)
+*Figure 2: User and group membership for webadmin*
 
 This configuration represents a deliberate privilege escalation vector within the lab environment and is documented as part of the baseline to support later attack-phase analysis.
-
+*Figure 3:*
 ---
 
 ### 2.3 Authentication and Authorization Activity
@@ -76,8 +78,11 @@ Baseline authentication activity was analyzed using `/var/log/auth.log`. Observe
 These events are considered normal within the context of system usage and lab setup but provide an important reference for distinguishing legitimate activity from malicious behavior during attack execution.
 
 ![Pre-attack auth.log snapshot](./images/authlog_downolad.png)
+*Figure 3:Pre-attack auth.log snapshot*
 ![Authentication and cron activity](./images/authlog1.png)
+*Figure 4: Authentication and cron activity*
 ![Sudo authentication attempts and sessions](./images/authlog2.png)
+*Figure 5: Sudo authentication attempts and sessions*
 
 ---
 
@@ -94,6 +99,7 @@ The Wazuh agent was confirmed to be active and running at the time of baseline c
   - modulesd
 
 ![Wazuh agent service status](./images/wazus_agents.png)
+*Figure 6: Wazuh agent service status*
 
 This confirms that host-based telemetry from the Linux server is being forwarded to the SIEM and will be available for detection and correlation during attack scenarios.
 
@@ -110,11 +116,17 @@ The following baseline artefacts were collected from the Linux server prior to a
 - Wazuh agent service status output
 
 ![Auth log snapshot](./images/authlog_downolad.png)
+*Figure 7: Auth log snapshot*
 ![Sudoers configuration](./images/sudoers.png)
+*Figure 8: Sudoers configuration*
 ![User identity verification](./images/webadmin.png)
+*Figure 9: User identity verification*
 ![Authentication activity](./images/authlog1.png)
+*Figure 10: Authentication activity*
 ![Sudo audit activity](./images/authlog2.png)
+*Figure 11: Sudo audit activity*
 ![Wazuh agent status](./images/wazus_agents.png)
+*Figure 12: Wazuh agent status*
 
 ---
 

@@ -41,6 +41,7 @@ The detection confirms that Wazuh correctly ingests and correlates SSH authentic
 
 **Evidence:**  
 ![Wazuh alerts – authentication and sudo activity](./images/alerts_log.png)
+*Figure 1: Wazuh alerts – authentication and sudo activity*
 
 ---
 
@@ -62,6 +63,7 @@ This distinction highlights proper analyst-driven validation and correct alert i
 
 **Evidence:**  
 ![Wazuh alerts – authentication and sudo activity](./images/alerts_log.png)
+*Figure 2: Wazuh alerts – authentication and sudo activity*
 
 ---
 
@@ -91,6 +93,7 @@ This confirms that:
 
 **Evidence:**  
 ![pfSense filterlog – no lateral movement detected](./images/filterlog_for_lateral.png)
+*Figure 3: pfSense filterlog – no lateral movement detected*
 
 ---
 

@@ -52,6 +52,7 @@ Accepted password for webadmin from 10.10.0.50 port 50213 ssh2
 This activity is visually confirmed in the screenshot shown below, which captures the extracted SSH authentication event from the rotated Linux authentication log.
 
 ![SSH authentication event from rotated auth.log](./images/log_attact.png)
+*Figure 1: SSH authentication event from rotated auth.log*
 
 
 This event confirms:
@@ -74,6 +75,7 @@ pam_unix(sshd:session): session opened for user webadmin (uid=1001)
 This behavior is illustrated in the screenshot shown below, which displays the PAM session creation event associated with the SSH login.
 
 ![PAM session opened for SSH login](./images/session.png)
+*Figure 2: PAM session opened for SSH login*
 
 
 This confirms full shell access to the Linux system under the compromised user account.
@@ -93,24 +95,8 @@ Observed actions include:
 
 ---
 
-### 4.1 Authentication Flooding
 
-Multiple failed SSH authentication attempts were observed.
-
-Example evidence:
-
-Failed password for webadmin from 127.0.0.1 port 36246 ssh2
-
-This authentication noise is visible in the screenshot shown below, which captures repeated failed authentication attempts recorded in the Linux authentication logs.
-
-![Repeated failed SSH authentication attempts](./images/logs.png)
-
-
-These events exceed baseline authentication behavior and indicate intentional authentication abuse.
-
----
-
-### 4.2 Failed Privilege Transitions
+### 4.1 Failed Privilege Transitions
 
 Failed attempts to switch users using su were recorded.
 
@@ -122,7 +108,7 @@ This behavior indicates unauthorized privilege transition attempts outside norma
 
 ---
 
-### 4.3 Privileged Command Execution
+### 4.2 Privileged Command Execution
 
 Successful execution of privileged commands was observed, including access to sensitive credential storage files and service manipulation.
 

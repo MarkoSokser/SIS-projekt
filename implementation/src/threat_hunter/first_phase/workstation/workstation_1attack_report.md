@@ -55,10 +55,13 @@ These events indicate repeated failed authentication attempts using legitimate a
 ### Evidence
 
 ![Windows Security Event 4625 – failed authentication (1)](./images/security_4025_1.png)
+*Figure 1: failed authentication attempts targeting `employee` account*
 
 ![Windows Security Event 4625 – failed authentication (2)](./images/security_4025_2.png)
+*Figure 2: 2. failed authentication attempts targeting `employee` account*
 
 ![Windows Security Event 4625 – failed authentication (3)](./images/security_4025_3.png)
+*Figure 3: failed authentication attempts targeting `read_team` account*
 
 ---
 
@@ -84,10 +87,13 @@ These events confirm that valid credentials were successfully used to access the
 ### Evidence
 
 ![Windows Security Event 4624 – successful logon (1)](./images/security_4624_1.png)
+*Figure 4: successful logon event targeting `admin_lab` account*
 
 ![Windows Security Event 4624 – successful logon (2)](./images/security_4624_2.png)
+*Figure 5: 2. successful logon event targeting `admin_lab` account*
 
 ![Windows Security Event 4624 – successful logon (3)](./images/security_4624_4.png)
+*Figure 6: 3. successful logon event targeting desktop account*
 
 ---
 
@@ -109,12 +115,16 @@ These patterns are strongly indicative of malicious service-based persistence ra
 ### Evidence
 
 ![Service creation event 7045 – persistence artifact (1)](./images/system_7045_1.png)
+*Figure 7: service creation event for `bQxi` service*
 
 ![Service creation event 7045 – persistence artifact (2)](./images/system_7045_2.png)
+*Figure 8: service creation event for `ZBNB` service*
 
 ![Service creation event 7045 – persistence artifact (3)](./images/system_7045_3.png)
+*Figure 9: service creation event for `eHRe` service*
 
 ![Service creation event 7045 – persistence artifact (4)](./images/system_7045_4.png)
+*Figure 10: service creation event for `QnGx` service*
 
 ---
 

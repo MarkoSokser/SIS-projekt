@@ -28,8 +28,11 @@ Observed interfaces:
 Private and bogon networks are explicitly blocked on the WAN interface, indicating a hardened perimeter configuration.
 
 ![pfSense firewall rules overview – WAN/LAN/OPT](./images/Firewall_rules1.png)
+*Figure 1: pfSense firewall rules overview – WAN/LAN/OPT*
 ![pfSense firewall rules – detailed view](./images/Firewall_rules2.png)
+*Figure 2: pfSense firewall rules – detailed view*
 ![pfSense firewall rules – additional rules](./images/Firewall_rules3.png)
+*Figure 3: pfSense firewall rules – additional rules*
 
 ---
 
@@ -47,6 +50,7 @@ These behaviors are visible in the firewall rules screenshots
 (`Firewall_rules1.png`, `Firewall_rules2.png`, `Firewall_rules3.png`).
 
 ![pfctl -sr firewall rules output](./images/Firewall_rules1.png)
+*Figure 4: pfctl -sr firewall rules output*
 
 ---
 
@@ -60,6 +64,7 @@ This confirms that no internal services are directly exposed to the WAN.
 This can be seen in the screenshot `nat.png`.
 
 ![pfSense NAT configuration (pfctl -sn)](./images/nat.png)
+*Figure 5: pfSense NAT configuration (pfctl -sn)*
 
 ---
 
@@ -86,8 +91,9 @@ From filter.log:
 No anomalous inbound connections were observed in the baseline window.
 
 ![pfSense firewall log – baseline traffic](./images/firewall_log1.png)
+*Figure 6: pfSense firewall log – baseline traffic*
 ![pfSense firewall log – continued baseline traffic](./images/firewall_log2.png)
-
+*Figure 7: pfSense firewall log – continued baseline traffic*
 ---
 
 ## 7. Security Observations and Potential Weaknesses

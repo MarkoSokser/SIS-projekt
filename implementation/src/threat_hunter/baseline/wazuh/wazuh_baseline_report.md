@@ -22,8 +22,11 @@ Screenshots `healthlog1.png` and `healthlog2.png` show that core services respon
 Optional services not required for a single-node deployment are inactive.
 
 ![Wazuh core service status – initial log output](./images/healthlog1.png)
+*Figure 1: Wazuh core service status – initial log output*
 ![Wazuh service status – continued output](./images/healthlog2.png)
+*Figure 2: Wazuh service status – continued output*
 ![Running Wazuh core services overview](./images/working_services.png)
+*Figure 3: Running Wazuh core services overview*
 
 ---
 
@@ -39,6 +42,7 @@ The agent list screenshot (`agent_lista.png`) shows:
 All agents were active at baseline time.
 
 ![Wazuh agent inventory and connectivity](./images/agent_list.png)
+*Figure 4: Wazuh agent inventory and connectivity*
 
 ---
 
@@ -51,6 +55,7 @@ during startup.
 Despite these warnings, inventory and monitoring modules continue to operate normally.
 
 ![IndexerConnector initialization warnings](./images/healthlog1.png)
+*Figure 5: IndexerConnector initialization warnings*
 
 ---
 
@@ -60,6 +65,7 @@ File Integrity Monitoring and Security Configuration Assessment activity is visi
 the SIEM logs (`alerts_pre_attack_report.log`), confirming that these modules are active.
 
 ![File Integrity Monitoring and SCA activity](./images/healthlog1.png)
+*Figure 6: File Integrity Monitoring and SCA activity*
 
 ---
 
@@ -69,6 +75,7 @@ The pre-attack alert log (`alerts_pre_attack_report.log`) does not show confirme
 detections. Logged warnings relate to service initialization rather than adversary behavior.
 
 ![Pre-attack Wazuh log activity](./images/healthlog1.png)
+*Figure 7: Pre-attack Wazuh log activity*
 
 ---
 

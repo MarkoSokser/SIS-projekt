@@ -40,6 +40,7 @@ This confirms that:
 
 **Evidence:**  
 ![Failed SSH authentication – webadmin](./images/failed_password.png)
+*Figure 1: Failed SSH authentication attempt targeting `webadmin`*
 
 ---
 
@@ -59,6 +60,7 @@ This demonstrates that:
 
 **Evidence:**  
 ![Failed sudo privilege escalation attempt](./images/privelage_escalation.png)
+*Figure 2: Failed sudo authentication attempts by `webadmin`*
 
 ---
 
@@ -77,6 +79,7 @@ This confirms that:
 
 **Evidence:**  
 ![Attempted access to /etc/shadow – unsuccessful](./images/dump_shadow.png)
+*Figure 3: Attempted access to `/etc/shadow` by `webadmin`*
 
 ---
 
