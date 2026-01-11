@@ -1,15 +1,15 @@
 # Pre-Attack Baseline – Environment Summary
 ## Table of Contents
-- [Purpose and Context](#1-purpose-and-context)
-- [Environment Composition and Architecture](#2-environment-composition-and-architecture)
-- [Windows Workstation Baseline Summary](#3-windows-workstation-baseline-summary)
-- [Linux Server Baseline Summary](#4-linux-server-baseline-summary)
-- [pfSense Firewall Baseline Summary](#5-pfsense-firewall-baseline-summary)
-- [Wazuh SIEM Baseline Summary](#6-wazuh-siem-baseline-summary)
-- [Cross-System Baseline Observations](#7-cross-system-baseline-observations)
-- [Known Weaknesses and Assumptions](#8-known-weaknesses-and-assumptions)
-- [Baseline Usage During Attack Phase](#9-baseline-usage-during-attack-phase)
-- [Conclusion](#10-conclusion)
+1. [Purpose and Context](#1-purpose-and-context)
+2. [Environment Composition and Architecture](#2-environment-composition-and-architecture)
+3. [Windows Workstation Baseline Summary](#3-windows-workstation-baseline-summary)
+4. [Linux Server Baseline Summary](#4-linux-server-baseline-summary)
+5. [pfSense Firewall Baseline Summary](#5-pfsense-firewall-baseline-summary)
+6. [Wazuh SIEM Baseline Summary](#6-wazuh-siem-baseline-summary)
+7. [Cross-System Baseline Observations](#7-cross-system-baseline-observations)
+8. [Known Weaknesses and Assumptions](#8-known-weaknesses-and-assumptions)
+9. [Baseline Usage During Attack Phase](#9-baseline-usage-during-attack-phase)
+10. [Conclusion](#10-conclusion)
 
 ## 1. Purpose and Context
 

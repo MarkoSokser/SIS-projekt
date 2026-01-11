@@ -1,14 +1,14 @@
 # Final Phase 2 Summary – Hardening Verification  
 *(Linux + Windows + Wazuh SIEM)*
 ## Table of Contents
-- [Objective](#objective)
-- [Linux Host (ubuntu-srv) – Summary](#linux-host-ubuntu-srv--summary)
-- [Windows Host (WIN-CLIENT) – Summary](#windows-host-win-client--summary)
-- [Wazuh SIEM – Summary](#wazuh-siem--summary)
-- [Overall Phase 2 Assessment](#overall-phase-2-assessment)
-- [Final Conclusion](#final-conclusion)
+1. [Objective](#objective)
+2. [Linux Host (ubuntu-srv) – Summary](#linux-host-ubuntu-srv--summary)
+3. [Windows Host (WIN-CLIENT) – Summary](#windows-host-win-client--summary)
+4. [Wazuh SIEM – Summary](#wazuh-siem--summary)
+5. [Overall Phase 2 Assessment](#overall-phase-2-assessment)
+6. [Final Conclusion](#final-conclusion)
 
-## Objective
+## 1. Objective
 
 The objective of **Phase 2 (Hardening Verification)** was to re-execute previously successful attack techniques against the hardened environment and verify whether implemented security controls effectively **prevent, contain, and detect** malicious activity.
 
@@ -20,7 +20,7 @@ This phase focused on validating:
 
 ---
 
-## Linux Host (ubuntu-srv) – Summary
+## 2. Linux Host (ubuntu-srv) – Summary
 
 ### Prevention Outcome
 All attack attempts against the Linux host were **unsuccessful**:
@@ -49,7 +49,7 @@ This gap does **not** affect prevention but represents an opportunity for improv
 
 ---
 
-## Windows Host (WIN-CLIENT) – Summary
+## 3. Windows Host (WIN-CLIENT) – Summary
 
 ### Prevention Outcome
 The Windows workstation was **not compromised** during Phase 2:
@@ -67,7 +67,7 @@ Firewall segmentation and network hardening prevented SMB/RPC access from the Li
 
 ---
 
-## Wazuh SIEM – Summary
+## 4. Wazuh SIEM – Summary
 
 ### Successful Detection
 Wazuh successfully detected and correlated:
@@ -94,7 +94,7 @@ This gap is clearly scoped and does not undermine overall security posture.
 
 ---
 
-## Overall Phase 2 Assessment
+## 5. Overall Phase 2 Assessment
 
 | Security Objective          |              Result               |
 |-----------------------------|-----------------------------------|
@@ -107,7 +107,7 @@ This gap is clearly scoped and does not undermine overall security posture.
 
 ---
 
-## Final Conclusion
+## 6. Final Conclusion
 
 Phase 2 confirms that the hardened environment is **resilient against the previously successful attack paths**. Preventive controls effectively blocked escalation and movement, while Wazuh provided accurate detection for authentication-based attack attempts and reliable validation of network containment.
 

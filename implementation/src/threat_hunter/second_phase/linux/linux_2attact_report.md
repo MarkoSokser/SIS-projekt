@@ -1,14 +1,14 @@
 # Phase 2 – Linux Host (ubuntu-srv) Hardening Verification Report
 ## Table of Contents
-- [Scope and Context](#scope-and-context)
-- [Initial Access – SSH Authentication Attempt (FAILED)](#initial-access--ssh-authentication-attempt-failed)
-- [Privilege Escalation – sudo Abuse Attempt (FAILED)](#privilege-escalation--sudo-abuse-attempt-failed)
-- [Credential Access – Attempted `/etc/shadow` Access (NOT SUCCESSFUL)](#credential-access--attempted-etcsheadow-access-not-successful)
-- [Attack Phases Not Reached](#attack-phases-not-reached)
-- [Detection Coverage and Identified Gap](#detection-coverage-and-identified-gap)
-- [Conclusion (Linux Host)](#conclusion-linux-host)
+1. [Scope and Context](#scope-and-context)
+2. [Initial Access – SSH Authentication Attempt (FAILED)](#initial-access--ssh-authentication-attempt-failed)
+3. [Privilege Escalation – sudo Abuse Attempt (FAILED)](#privilege-escalation--sudo-abuse-attempt-failed)
+4. [Credential Access – Attempted `/etc/shadow` Access (NOT SUCCESSFUL)](#credential-access--attempted-etcsheadow-access-not-successful)
+5. [Attack Phases Not Reached](#attack-phases-not-reached)
+6. [Detection Coverage and Identified Gap](#detection-coverage-and-identified-gap)
+7. [Conclusion (Linux Host)](#conclusion-linux-host)
 
-## Scope and Context
+## 1. Scope and Context
 
 This section documents the **Phase 2 (Hardening Verification)** analysis for the Linux host `ubuntu-srv`.  
 The objective was to validate whether previously exploited attack paths remain viable after security hardening, and to assess both **prevention** and **detection** capabilities.
@@ -23,7 +23,7 @@ Evidence was collected from:
 
 ---
 
-## Initial Access – SSH Authentication Attempt (FAILED)
+## 2.Initial Access – SSH Authentication Attempt (FAILED)
 
 An SSH authentication attempt targeting the `webadmin` account was observed and logged.
 
@@ -44,7 +44,7 @@ This confirms that:
 
 ---
 
-## Privilege Escalation – sudo Abuse Attempt (FAILED)
+## 3. Privilege Escalation – sudo Abuse Attempt (FAILED)
 
 Following the failed SSH authentication, the attacker attempted to escalate privileges using `sudo` as the `webadmin` user.
 
@@ -64,7 +64,7 @@ This demonstrates that:
 
 ---
 
-## Credential Access – Attempted `/etc/shadow` Access (NOT SUCCESSFUL)
+## 4. Credential Access – Attempted `/etc/shadow` Access (NOT SUCCESSFUL)
 
 A critical attack objective was to access `/etc/shadow` to obtain credential hashes.
 
@@ -83,7 +83,7 @@ This confirms that:
 
 ---
 
-## Attack Phases Not Reached
+## 5. Attack Phases Not Reached
 
 Due to the failure of both Initial Access and Privilege Escalation, the attack chain did **not progress** to subsequent phases, including:
 
@@ -95,7 +95,7 @@ The absence of artifacts related to these phases is an **expected and correct ou
 
 ---
 
-## Detection Coverage and Identified Gap
+## 6. Detection Coverage and Identified Gap
 
 ### What Was Successfully Detected
 - Failed SSH authentication attempts
@@ -112,7 +112,7 @@ This represents a **Detection Gap**, not a failure of existing detection logic.
 
 ---
 
-## Conclusion (Linux Host)
+## 7. Conclusion (Linux Host)
 
 The Phase 2 hardening validation for `ubuntu-srv` confirms that the system is resilient against the tested attack paths:
 

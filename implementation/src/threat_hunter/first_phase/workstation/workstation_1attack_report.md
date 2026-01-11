@@ -1,14 +1,14 @@
 # Windows Attack Report (Post-Attack)
 ## Table of Contents
-- [Purpose & Role of the System](#1-purpose--role-of-the-system)
-- [Attack Overview](#2-attack-overview)
-- [Authentication Failures (Event ID 4625)](#3-authentication-failures-event-id-4625)
-- [Successful Authentication Events (Event ID 4624)](#4-successful-authentication-events-event-id-4624)
-- [Service Creation and Persistence (Event ID 7045)](#5-service-creation-and-persistence-event-id-7045)
-- [Attack Timeline Summary](#6-attack-timeline-summary)
-- [Detection Gaps and Observations](#7-detection-gaps-and-observations)
-- [Key Detection Points for Future Monitoring](#8-key-detection-points-for-future-monitoring)
-- [Conclusion](#9-conclusion)
+1. [Purpose & Role of the System](#1-purpose--role-of-the-system)
+2. [Attack Overview](#2-attack-overview)
+3. [Authentication Failures (Event ID 4625)](#3-authentication-failures-event-id-4625)
+4. [Successful Authentication Events (Event ID 4624)](#4-successful-authentication-events-event-id-4624)
+5. [Service Creation and Persistence (Event ID 7045)](#5-service-creation-and-persistence-event-id-7045)
+6. [Attack Timeline Summary](#6-attack-timeline-summary)
+7. [Detection Gaps and Observations](#7-detection-gaps-and-observations)
+8. [Key Detection Points for Future Monitoring](#8-key-detection-points-for-future-monitoring)
+9. [Conclusion](#9-conclusion)
 
 ## 1. Purpose & Role of the System
 

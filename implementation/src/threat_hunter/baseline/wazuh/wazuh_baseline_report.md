@@ -1,12 +1,12 @@
 # Wazuh SIEM Baseline Report (Pre-Attack)
 ## Table of Contents
-- [Purpose and Scope](#1-purpose-and-scope)
-- [Service Health and Core Components](#2-service-health-and-core-components)
-- [Agent Inventory and Connectivity](#3-agent-inventory-and-connectivity)
-- [Indexer and Inventory Warnings](#4-indexer-and-inventory-warnings)
-- [File Integrity and Configuration Monitoring](#5-file-integrity-and-configuration-monitoring)
-- [Baseline Alert State](#6-baseline-alert-state)
-- [Baseline Conclusion](#7-baseline-conclusion)
+1. [Purpose and Scope](#1-purpose-and-scope)
+2. [Service Health and Core Components](#2-service-health-and-core-components)
+3. [Agent Inventory and Connectivity](#3-agent-inventory-and-connectivity)
+4. [Indexer and Inventory Warnings](#4-indexer-and-inventory-warnings)
+5. [File Integrity and Configuration Monitoring](#5-file-integrity-and-configuration-monitoring)
+6. [Baseline Alert State](#6-baseline-alert-state)
+7. [Baseline Conclusion](#7-baseline-conclusion)
 
 ## 1. Purpose and Scope
 

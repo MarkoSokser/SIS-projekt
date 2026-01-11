@@ -1,15 +1,15 @@
 # Phase 2 – Wazuh SIEM Analysis (Hardening Verification)
 ## Table of Contents
-- [Scope and Objective](#scope-and-objective)
-- [Authentication-Based Attack Detection (SUCCESSFUL)](#authentication-based-attack-detection-successful)
-  - [SSH Authentication Failure](#ssh-authentication-failure)
-- [Privilege Escalation Detection (SUCCESSFUL, WITH CONTEXT)](#privilege-escalation-detection-successful-with-context)
-- [Lateral Movement Detection – Network Perspective (BLOCKED)](#lateral-movement-detection--network-perspective-blocked)
-- [Correlation with Red Team Execution](#correlation-with-red-team-execution)
-- [Detection Gap Identified – Process Execution Visibility](#detection-gap-identified--process-execution-visibility)
-- [Conclusion (Wazuh SIEM)](#conclusion-wazuh-siem)
+1. [Scope and Objective](#scope-and-objective)
+2. [Authentication-Based Attack Detection (SUCCESSFUL)](#authentication-based-attack-detection-successful)
+  2.1. [SSH Authentication Failure](#ssh-authentication-failure)
+3. [Privilege Escalation Detection (SUCCESSFUL, WITH CONTEXT)](#privilege-escalation-detection-successful-with-context)
+4. [Lateral Movement Detection – Network Perspective (BLOCKED)](#lateral-movement-detection--network-perspective-blocked)
+5. [Correlation with Red Team Execution](#correlation-with-red-team-execution)
+6. [Detection Gap Identified – Process Execution Visibility](#detection-gap-identified--process-execution-visibility)
+7. [Conclusion (Wazuh SIEM)](#conclusion-wazuh-siem)
 
-## Scope and Objective
+## 1. Scope and Objective
 
 This section documents the **Phase 2 (Hardening Verification)** analysis from the **Wazuh SIEM perspective**.  
 The goal was to validate whether Wazuh successfully detects and correlates attack attempts executed during Phase 2, and to assess visibility into both **authentication-based attacks** and **lateral movement attempts** after infrastructure hardening.
@@ -22,9 +22,9 @@ The analysis focuses on:
 
 ---
 
-## Authentication-Based Attack Detection (SUCCESSFUL)
+## 2. Authentication-Based Attack Detection (SUCCESSFUL)
 
-### SSH Authentication Failure
+### 2.1. SSH Authentication Failure
 
 Wazuh successfully detected a failed SSH authentication attempt targeting the `webadmin` user.
 
@@ -45,7 +45,7 @@ The detection confirms that Wazuh correctly ingests and correlates SSH authentic
 
 ---
 
-## Privilege Escalation Detection (SUCCESSFUL, WITH CONTEXT)
+## 3. Privilege Escalation Detection (SUCCESSFUL, WITH CONTEXT)
 
 Wazuh generated alerts related to successful `sudo` execution to root.
 
@@ -67,7 +67,7 @@ This distinction highlights proper analyst-driven validation and correct alert i
 
 ---
 
-## Lateral Movement Detection – Network Perspective (BLOCKED)
+## 4. Lateral Movement Detection – Network Perspective (BLOCKED)
 
 To identify potential lateral movement, pfSense `filterlog` telemetry was analyzed for SMB/RPC-related traffic.
 
@@ -97,7 +97,7 @@ This confirms that:
 
 ---
 
-## Correlation with Red Team Execution
+## 5. Correlation with Red Team Execution
 
 CALDERA execution logs confirmed that:
 - PsExec was attempted
@@ -112,7 +112,7 @@ The absence of Wazuh alerts for lateral movement is therefore **expected and cor
 
 ---
 
-## Detection Gap Identified – Process Execution Visibility
+## 6. Detection Gap Identified – Process Execution Visibility
 
 While Wazuh successfully detected:
 - SSH authentication failures
@@ -131,7 +131,7 @@ This is classified as a **Detection Gap**, not a failure of existing detection l
 
 ---
 
-## Conclusion (Wazuh SIEM)
+## 7. Conclusion (Wazuh SIEM)
 
 Wazuh SIEM performed as expected during Phase 2 hardening validation:
 

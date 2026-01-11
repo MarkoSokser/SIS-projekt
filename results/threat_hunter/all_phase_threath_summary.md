@@ -1,21 +1,21 @@
 # Final Security Assessment Report  
 ## TechNova Lab – Baseline, Attack Simulation, and Hardening Validation
 ## Table of Contents
-- [Executive Overview](#1-executive-overview)
-- [Environment Overview](#2-environment-overview)
-- [Phase 0 – Pre-Attack Baseline Summary](#3-phase-0--pre-attack-baseline-summary)
-- [Phase 1 – Adversary Emulation (Baseline / Weak Security)](#4-phase-1--adversary-emulation-baseline--weak-security)
-  - [Linux Host – Phase 1 Summary](#41-linux-host--phase-1-summary)
-  - [Windows Host – Phase 1 Summary](#42-windows-host--phase-1-summary)
-  - [Wazuh SIEM – Phase 1 Summary](#43-wazuh-siem--phase-1-summary)
-- [Phase 2 – Hardening Verification](#5-phase-2--hardening-verification)
-  - [Linux Host – Phase 2 Summary](#51-linux-host--phase-2-summary)
-  - [Windows Host – Phase 2 Summary](#52-windows-host--phase-2-summary)
-  - [Wazuh SIEM – Phase 2 Summary](#53-wazuh-siem--phase-2-summary)
-- [Detection Gaps and Visibility Limitations](#6-detection-gaps-and-visibility-limitations)
-- [Cross-Phase Comparative Assessment](#7-cross-phase-comparative-assessment)
-- [Key Lessons Learned](#8-key-lessons-learned)
-- [Final Conclusion](#9-final-conclusion)
+1. [Executive Overview](#1-executive-overview)
+2. [Environment Overview](#2-environment-overview)
+3. [Phase 0 – Pre-Attack Baseline Summary](#3-phase-0--pre-attack-baseline-summary)
+4. [Phase 1 – Adversary Emulation (Baseline / Weak Security)](#4-phase-1--adversary-emulation-baseline--weak-security)
+  4.1. [Linux Host – Phase 1 Summary](#41-linux-host--phase-1-summary)
+  4.2. [Windows Host – Phase 1 Summary](#42-windows-host--phase-1-summary)
+  4.3. [Wazuh SIEM – Phase 1 Summary](#43-wazuh-siem--phase-1-summary)
+5. [Phase 2 – Hardening Verification](#5-phase-2--hardening-verification)
+  5.1. [Linux Host – Phase 2 Summary](#51-linux-host--phase-2-summary)
+  5.2. [Windows Host – Phase 2 Summary](#52-windows-host--phase-2-summary)
+  5.3. [Wazuh SIEM – Phase 2 Summary](#53-wazuh-siem--phase-2-summary)
+6. [Detection Gaps and Visibility Limitations](#6-detection-gaps-and-visibility-limitations)
+7. [Cross-Phase Comparative Assessment](#7-cross-phase-comparative-assessment)
+8. [Key Lessons Learned](#8-key-lessons-learned)
+9. [Final Conclusion](#9-final-conclusion)
 
 ---
 
