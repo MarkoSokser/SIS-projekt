@@ -1,4 +1,4 @@
-#  TechNova Cyber Range – Adversary Simulation Lab
+#  Adversary Simulation with MITRE CALDERA
 
 A comprehensive cybersecurity training environment built for adversary emulation, detection engineering, and blue team/red team exercises using the **MITRE ATT&CK** framework.
 
@@ -181,3 +181,4 @@ SIS-projekt-1/
 This environment is designed for **educational purposes only**. All vulnerabilities are intentional and exist solely within an isolated lab network. Never use these techniques, credentials, or configurations in production environments.
 
 ---
+
