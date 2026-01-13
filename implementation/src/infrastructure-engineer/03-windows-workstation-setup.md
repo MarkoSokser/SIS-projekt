@@ -168,7 +168,7 @@ ping 10.10.0.1
 
 ---
 
-![Ping Validation](./images/WinWorkstation/DNS_validation/ping_pfsense.png).
+![Ping Validation](./images/WinWorkstation/DNS_validation/ping_pfSense.png)
 
 *Figure 17: Ping test for pfSense LAN*
 
